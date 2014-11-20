@@ -1,0 +1,94 @@
+<!doctype html>
+<html class="no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Тестирование</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles/main.css">
+	<script type="text/javascript">
+		window.QUESTIONS = [];
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div id="page-container" class="jumbotron"></div>
+	</div>
+	<br/>
+	<br/>
+	<script id="tpl-main" type="text/x-ejs-template">
+		<div class="b-main row">
+			<div class="col-xs-4 col-xs-offset-4">
+				<div class="text-center">
+					<label class="text-center">Введите номер варианта</label>
+					<input id="test-variant" value="" type="text" class="form-control"/>
+				</div>
+				<div class="text-center" style="margin-top: 20px">
+					<button class="btn btn-success btn-lg">Начать</button>
+				</div>
+			</div>
+		</div>
+	</script>
+	<script id="tpl-test" type="text/x-ejs-template">
+		<% var randDate = Date.now() %>
+		<form class="b-test" onsubmit="return!1;">
+			<div class="b-test__question"><%= question %></div>
+			<div class="b-test__answers">
+				<% _.each(answers, function (answer, index) {%>
+				<div class="b-test__answer">
+					<div class="b-test__answer-number"><%= answer.number %></div>
+					<div class="b-test__answer-toggle-wr">
+						<input class="b-test__answer-toggle" name="answer-<%= answer.number %>" value="<%= answer.number %>" type="checkbox" id="chk-<%= randDate %>-<%= answer.number %>"/>
+						<label class="b-test__answer-toggle-label" for="chk-<%= randDate %>-<%= answer.number %>"><%= answer.text %></label>
+					</div>
+				</div>
+				<%}) %>
+			</div>
+			<div class="b-test__submit-wr">
+				<button class="b-test__submit btn-success btn btn-lg" id="test-submit" type="submit">Ответить</button>
+			</div>
+		</form>
+	</script>
+	<script id="tpl-result" type="text/x-ejs-template">
+		<div class="b-result">
+			<% if (errors.length) {%>
+			<div class="b-result__fail-h1">Тест <b>№<%= variant %></b> не сдан!</div>
+			<% } else { %>
+			<div class="b-result__success-h1">Тест <b>№<%= variant %></b> сдан!</div>
+			<% } %>
+			<br/>
+			<% if (errors.length) {%>
+				<div class="b-result__errors-wr">
+					<div class="b-result__errors">
+						<div class="b-result__fail-error-h">Необходимо изучить <b>(<%= errors.length %>/<%= questions.length %>)</b>:</div>
+						<% _.each(errors, function (number) { %>
+						<div class="b-result__error">
+							<div class="b-result__error-number"><%= Number(number)+1 %></div>
+							<div class="b-result__error-text"><%= questions[number].question %></div>
+						</div>
+						<% }) %>
+					</div>
+				</div>
+			<% } %>
+			<br/>
+			<div class="b-result__reload-btn-wr text-center">
+				<button class="b-result__reload-btn btn btn-lg btn-success" onclick="window.location.reload()">Попробывать еще раз</button>
+			</div>
+		</div>
+	</script>
+	<script src="bower_components/jquery/jquery.js"></script>
+	<script src="bower_components/lodash/dist/lodash.min.js"></script>
+	<script src="scripts/lib/questions.js"></script>
+	<script src="scripts/data/1.js"></script>
+	<script src="scripts/data/2.js"></script>
+	<script src="scripts/lib/Class.js"></script>
+	<script src="scripts/lib/template.js"></script>
+	<script src="scripts/lib/View.js"></script>
+	<script src="scripts/app/PageView.js"></script>
+	<script src="scripts/app/FirstPageView.js"></script>
+	<script src="scripts/app/TestPageView.js"></script>
+	<script src="scripts/app/ResultPageView.js"></script>
+	<script src="scripts/main.js"></script>
+</body>
+</html>
