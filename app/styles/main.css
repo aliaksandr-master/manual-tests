@@ -7294,6 +7294,15 @@ td.visible-print {
 .fa-plus-square-o:before {
   content: "\f196";
 }
+.input-group-addon {
+  background: #ddd;
+  border: none;
+  text-align: left;
+  color: #000;
+}
+.container {
+  max-width: 1000px;
+}
 .jumbotron {
   margin: 50px auto 0 auto;
   font-size: 16px;
@@ -7321,13 +7330,8 @@ td.visible-print {
 .b-test__answers:after {
   clear: both;
 }
-.b-test__answer:before,
-.b-test__answer:after {
-  content: " ";
-  display: table;
-}
-.b-test__answer:after {
-  clear: both;
+.b-test__answer {
+  border-radius: 3px;
 }
 .b-test__answer:before,
 .b-test__answer:after {
@@ -7336,6 +7340,20 @@ td.visible-print {
 }
 .b-test__answer:after {
   clear: both;
+}
+.b-test__answer:before,
+.b-test__answer:after {
+  content: " ";
+  display: table;
+}
+.b-test__answer:after {
+  clear: both;
+}
+.b-test__answer:hover {
+  background: #e1e1e1;
+}
+.b-test__answer + .b-test__answer {
+  margin-top: 10px;
 }
 .b-test__answer-number {
   float: left;
@@ -7352,13 +7370,20 @@ td.visible-print {
 .b-test__answer-toggle {
   float: left;
   display: block;
+  width: 13px;
+  height: 13px;
+  margin: 9px 0 0 !important;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
 }
 .b-test__answer-toggle-label {
   overflow: hidden;
   display: block;
-  padding: 4px;
+  padding: 4px 4px 4px 10px;
   vertical-align: top;
   font-weight: normal;
+  cursor: pointer;
 }
 .b-test__submit-wr {
   padding-top: 20px;
@@ -7409,5 +7434,19 @@ td.visible-print {
   font-size: 2em;
   text-align: center;
   color: green;
+}
+.b-test__counter {
+  float: right;
+  display: block;
+}
+.test-formula {
+  display: inline;
+}
+.baseline-fix {
+  display: inline !important;
+}
+.b-main-info {
+  color: #999;
+  font-size: 12px;
 }
 /*# sourceMappingURL=/styles/main.css.map */

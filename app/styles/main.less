@@ -4,6 +4,16 @@
 @import "../bower_components/font-awesome/less/font-awesome.less";
 @fa-font-path: "../fonts/font-awesome";
 
+.input-group-addon {
+	background: #ddd;
+	border: none;
+	text-align: left;
+	color: #000;
+}
+
+.container {
+	max-width: 1000px;
+}
 
 .jumbotron {
 	margin: 50px auto 0 auto;
@@ -32,6 +42,15 @@
 
 .b-test__answer {
 	.clearfix();
+	border-radius: 3px;
+
+	&:hover {
+		background: #e1e1e1;
+	}
+
+	+ .b-test__answer {
+		margin-top: 10px;
+	}
 }
 
 .b-test__answer-number {
@@ -51,14 +70,21 @@
 .b-test__answer-toggle {
 	float: left;
 	display: block;
+	width: 13px;
+	height: 13px;
+	margin: 9px 0 0 !important;
+	padding: 0;
+	font-size: 0;
+	line-height: 0;
 }
 
 .b-test__answer-toggle-label {
 	overflow: hidden;
 	display: block;
-	padding: 4px;
+	padding: 4px 4px 4px 10px;
 	vertical-align: top;
 	font-weight: normal;
+	cursor: pointer;
 }
 
 .b-test__submit-wr {
@@ -122,4 +148,23 @@
 
 .b-result__reload-btn {
 
+}
+
+.b-test__counter {
+	float: right;
+	display: block;
+}
+
+.test-formula {
+	display: inline;
+}
+
+.baseline-fix {
+	display: inline !important;
+}
+
+
+.b-main-info {
+	color: #999;
+	font-size: 12px;
 }

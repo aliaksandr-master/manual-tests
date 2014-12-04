@@ -2,7 +2,8 @@
 
 window.TestPageView = window.PageView.extend({
 	events: {
-		'click #test-submit': 'submit'
+		'click #test-submit': 'submit',
+		'toggle-answer form': 'toggleAnswer'
 	},
 
 	template: window.getTemplate('test'),
@@ -10,6 +11,10 @@ window.TestPageView = window.PageView.extend({
 	render: function () {
 		window.TestPageView.__super__.render.apply(this, arguments);
 		this.el('#test-submit').focus();
+	},
+
+	toggleAnswer: function (e, number) {
+		this.el('.b-test__answer-toggle').eq(number - 1).click();
 	},
 
 	submit: function () {

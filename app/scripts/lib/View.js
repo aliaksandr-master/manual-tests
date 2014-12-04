@@ -25,7 +25,6 @@ window.View = window.Class.extend({
 	template: function (data) { return ''; },
 
 	render: function () {
-		console.log(this.template);
 		var data = this.getTemplateData();
 		var html = this.template(data);
 		this.el()[this.containerMethod](html);
