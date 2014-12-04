@@ -22,10 +22,12 @@ window.View = window.Class.extend({
 
 	autoRender: true,
 
-	template: function () { return ''; },
+	template: function (data) { return ''; },
 
 	render: function () {
-		var html = this.template(this.getTemplateData());
+		console.log(this.template);
+		var data = this.getTemplateData();
+		var html = this.template(data);
 		this.el()[this.containerMethod](html);
 		this.delegateEvent();
 	},
@@ -54,7 +56,7 @@ window.View = window.Class.extend({
 			if (!_.isFunction(that[ev.handler]) ) {
 				throw new Error('undefined event handler "' + ev.handler + '"');
 			}
-			that.el().on(ev.name, ev.selector, that[ev.handler].bind(that));
+			that.el().on(ev.name, ev.selector, _.bind(that[ev.handler],that));
 		});
 	},
 

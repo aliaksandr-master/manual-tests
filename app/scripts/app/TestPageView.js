@@ -5,7 +5,7 @@ window.TestPageView = window.PageView.extend({
 		'click #test-submit': 'submit'
 	},
 
-	template:window.getTemplate('test'),
+	template: window.getTemplate('test'),
 
 	render: function () {
 		window.TestPageView.__super__.render.apply(this, arguments);

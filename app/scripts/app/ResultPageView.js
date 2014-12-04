@@ -1,5 +1,5 @@
 "use strict";
 
 window.ResultPageView = window.PageView.extend({
-	template: getTemplate('result')
+	template: window.getTemplate('result')
 });

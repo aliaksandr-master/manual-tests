@@ -4,10 +4,10 @@ window.FirstPageView = window.PageView.extend({
 	events: {
 		'change #test-variant': 'updateTestVariant'
 	},
-	template: getTemplate('main'),
+	template: window.getTemplate('main'),
 	updateTestVariant: function (e) {
 		var VAR_EXP = /^(\d+)(?:Q(\d+))?(?:E(\d+))?$/i,
-			variantString = this.el('input').val().trim();
+			variantString = this.el('input').val().replace(/^\s*|\s*$/, '');
 
 		if (!VAR_EXP.test(variantString)) {
 			alert('Неверный формат');

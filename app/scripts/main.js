@@ -25,7 +25,9 @@ $(function () {
 
 		var prev = null;
 		_.each(test.questions, function (question, index) {
-			var currentTest = Object.create(test);
+			var Surrogate = function () {};
+			Surrogate.prototype = test;
+			var currentTest = new Surrogate();
 			_.extend(currentTest, question);
 			currentTest.currentNumber = index;
 

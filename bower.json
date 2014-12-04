@@ -6,7 +6,9 @@
     "font-awesome": "~4.0.0",
     "modernizr": "~2.6.2",
     "jquery": "~1.9.1",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "underscore": "~1.7.0",
+    "es5-shim": "~4.0.5"
   },
   "devDependencies": {}
 }
