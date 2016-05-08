@@ -1,0 +1,353 @@
+@f: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@pad: 4px;
+
+@z-modal: 9991;
+@z-notice: 9992;
+
+@screen-lg-min: 1200px;
+@screen-md-min: 992px;
+@screen-md-max: (@screen-lg-min - 1);
+@screen-sm-min: 768px;
+@screen-sm-max: (@screen-md-min - 1);
+@screen-xs-min: 480px;
+@screen-xs-max: (@screen-sm-min - 1);
+
+@color-dark-blue: #213246;
+@color-light-blue: #f5f6f8;
+@color-primary-action: #1a69d6;
+@color-primary-action-hover: #1a65ca;
+@color-green: #28bf4c;
+@color-header: #222;
+@color-text: #444;
+@color-muted: #8c9099;
+@color-muted-light: #ddd;
+
+@color-blue-light-1: #f4f6f9;
+@color-blue-light-2: #ebf1ff;
+@color-blue-light-3: #ebedf2;
+
+@color-blue-1: #81a0f8;
+@color-blue-2: #66afe9;
+@color-blue-3: #3182f8;
+@color-blue-4: #217dfc;
+@color-blue-5: #015cdd;
+
+@color-blue-gray-1: #dcdee3;
+@color-blue-gray-2: #bdc2c8;
+@color-blue-gray-3: #7d8189;
+@color-blue-gray-4: #5d6169;
+@color-blue-gray-5: #465164;
+
+@color-red-1: #dc8d99;
+@color-red-2: #e03345;
+@color-red-3: #ff0000;
+@color-red-4: #d85030;
+
+@color-yellow-3: #ffce00;
+
+@color-gray-1: #f1f1f1;
+@color-gray-2: #f5f5f5;
+@color-gray-3: #eee;
+@color-gray-4: #d5d5d5;
+@color-gray-5: #ccc;
+@color-gray-6: #b5b5b5;
+@color-gray-7: #bbb;
+@color-gray-8: #999;
+@color-gray-9: #939598;
+@color-gray-10: #777;
+@color-gray-11: #666;
+
+@color-alt-0: #fa716d;
+@color-alt-1: #ecba63;
+@color-alt-2: #d185f1;
+@color-alt-3: #ec6396;
+@color-alt-4: #5be2d7;
+@color-alt-5: #ec9063;
+@color-alt-6: #80dbf5;
+@color-alt-7: #a8ee82;
+
+@layout--max-width: 980px;
+@layout__header--height: 64px;
+@layout__header--pad-v: 0;
+
+@fi: 'splitmetrics';
+@fi--search: '\f002';
+@fi--check-circle: '\f058';
+@fi--question-circle: '\f059';
+@fi--twitter-square: '\f081';
+@fi--facebook-square: '\f082';
+@fi--linkedin-square: '\f08c';
+@fi--google-plus-square: '\f0d4';
+@fi--heatmap: '\e61c';
+@fi--video: '\e61b';
+@fi--alternatives: '\e615';
+@fi--summary: '\e616';
+@fi--installbutton: '\e617';
+@fi--screenshots: '\e618';
+@fi--description: '\e619';
+@fi--audience: '\e61a';
+@fi--apple-iphone: '\e611';
+@fi--apple-ipad: '\e612';
+@fi--android-tablet: '\e613';
+@fi--android-phone: '\e614';
+@fi--dropdown: '\e610';
+@fi--close: '\e60f';
+@fi--android-soon: '\e60e';
+@fi--pause: '\e60c';
+@fi--stop: '\e60d';
+@fi--run: '\e607';
+@fi--edit: '\e608';
+@fi--duplicate: '\e609';
+@fi--down: '\e60a';
+@fi--archive: '\e60b';
+@fi--checkmark: '\e606';
+@fi--android: '\e604';
+@fi--apple: '\e605';
+@fi--chart: '\e602';
+@fi--download: '\e600';
+@fi--view: '\e601';
+@fi--zoom: '\e603';
+@fi--dd: '\e900';
+@fi--refresh: '\f021';
+@fi--benchmarks: '\e901';
+@fi--copy-to-buffer: '\e902';
+@fi--cog: '\e903';
+@fi--reset: '\e904';
+@fi--duplicate2: '\e905';
+@fi--export: '\e906';
+@fi--share: '\e907';
+@fi--cb-unchecked: '\e908';
+@fi--cb-checked: '\e909';
+@fi--report-type-table: '\e90b';
+@fi--report-type-bar-chart: '\e90c';
+@fi--report-type-linear-graph: '\e90d';
+@fi--winner: '\e90e';
+@fi--flag: '\e90f';
+@fi--calendar: '\e910';
+@fi--ok-check: '\e911';
+@fi--lock: '\e913';
+@fi--filter: '\e914';
+@fi--info-download-list: '\e915';
+@fi--info-finished: '\e917';
+@fi--info-alert: '\e918';
+@fi--locked: '\e919';
+@fi--refresh: '\f021';
+@fi--edit-outline: '\e90a';
+@fi--lar: '\e91a';
+@fi--rar: '\e91b';
+@fi--star: '\f005';
+@fi--star-o: '\f006';
+@fi--star-half: '\f089';
+@fi--star-half-o: '\f123';
+@fi--info-user: '\e916';
+@fi--facebook: '\e91d';
+@fi--info-users: '\e91f';
+@fi--info-no-data: '\e91e';
+@fi--mail: '\e91c';
+@fi--cloud-upload: '\e920';
+@fi--pencil: '\e921';
+@fi--clock: '\e922';
+@fi--link: '\e923';
+@fi--align-left: '\e924';
+@fi--align-right: '\e925';
+@fi--align-center: '\e925';
+@fi--align-right: '\e926';
+@fi--google-plus: '\e927';
+@fi--emoji-happy: '\e928';
+@fi--mail-forward: '\e929';
+@fi--globe: '\e92c';
+@fi--comment: '\e92a';
+@fi--like: '\e92b';
+@fi--photo-camera: '\e912';
+
+
+// COMPONENTS:
+@b-note-counter--size: 16px;
+
+@b-tab__margin-h: @pad*3;
+@b-tab__border-w: 3px;
+
+@b-app-header__brand-img--size: 22px;
+@b-app-header__brand-img-public--height: 22px;
+@b-app-header__brand-img-public--width: 114px;
+
+@b-experiment-form--width: 500px;
+
+@b-traffic-campaign-form--width: 500px;
+
+@b-experiment__header--height: 70px;
+
+@b-billing-info-widget__image--orig-width: 79px;
+@b-billing-info-widget__image--orig-height: 98px;
+
+@b-sequence-step--size: 40px;
+@b-sequence-step--color: #bbc3cc;
+@b-sequence-step--color-hover: #8f97a0;
+@b-sequence-step--color-active: @color-green;
+
+@b-experiment-list-item--border-color: #EEEFF1;
+@b-experiment-list-item--height: 90px;
+@b-experiment-list-item__icon--height: 60px;
+
+@b-analytics__body--max-width: @layout--max-width;
+
+@b-analytics__table--color-gray-light: #EBECF0;
+@b-analytics__table--color-gray-dark: #BCBEC0;
+@b-analytics__table--color-positive: #45B100;
+@b-analytics__table--color-negative: #F6571B;
+@b-analytics__table-head--bg: @color-gray-1;
+@b-analytics__table-text-head--color: #6d6f72;
+
+@b-analytics__table-head--pad: 25px;
+
+@b-analytics__chart--height: 250px;
+
+@b-analytics-experiment-controls--border: #CDD1D8;
+@b-analytics-experiment-controls--border-width: 1px;
+@b-analytics-experiment-controls--border-radius: 4px;
+@b-analytics-experiment-controls--color: #9DA5B2;
+@b-analytics-experiment-controls--bg-hover: @color-gray-1;
+@b-analytics-experiment-controls--color-hover: darken(@b-analytics-experiment-controls--color, 10%);
+@b-analytics-experiment-controls--color-active: @color-blue-4;
+@b-analytics-experiment-controls__menu--margin-top: @pad;
+@b-analytics-experiment-controls__btn--height: 30px;
+@b-analytics-experiment-controls__btn-caret--size-h: 4px;
+@b-analytics-experiment-controls__btn-caret--size-v: 6px;
+@b-analytics-experiment-controls__btn-dot--size: 4px;
+@b-analytics-experiment-controls__caret--border: lighten(@b-analytics-experiment-controls--border, 10%);
+@b-analytics-experiment-controls__btn--fz: 12px;
+
+@b-metric-alt-marker__marker--size: 24px;
+@b-metric-alt-marker__marker--size-small: 20px;
+@b-metric-alt-marker__header--fz: 14px;
+@b-metric-alt-marker__header--fz-small: 12px;
+@b-metric-alt-marker__header--lh: 1.4;
+
+@b-analytics-alternatives-filter__alt--height: 40px;
+@b-analytics-alternatives-filter__alt--bg-hover: @color-gray-1;
+
+@b-metric-category-table-alt--pad: 60px;
+
+@b-analytics-overview__stat--width: 180px;
+
+@b-dashboard__field--height: 32px;
+
+@b-analytics-filter__border-color: @color-gray-3;
+@b-analytics-filter__menu--width: 600px;
+
+@b-analytics-filter__border-color: @color-gray-3;
+@b-analytics-filter__control--fz: 12px;
+
+@b-chart-grid__line-h--fz: @pad*3;
+@b-chart-grid__line-h--color: @color-gray-5;
+@b-chart-grid__line--color: @color-muted-light;
+
+@b-notice-bar--size: 34px;
+@b-notice-bar--fz: 14px;
+@b-notice-bar--lh: 1.4;
+
+@b-experiment-control-panel__field--height: 36px;
+
+@b-header-user--size: 30px;
+@b-header-user--max-width: 250px;
+@b-header-user__menu--width: 300px;
+@b-header-user__triangle--size: 10px;
+
+@b-loading--width: 55px;
+@b-loading--height: 55px;
+
+@b-metric-behavior-break-down-alt__marker--size: 20px;
+@b-metric-behavior-break-down-alt__info-color-box--size: 14px;
+
+@b-metric-behavior-funnel-chart__progress--height: 38px;
+@b-metric-behavior-funnel-chart__progress--margin: 2px;
+
+@b-metric-behavior-funnel-table__td--border-color: @color-gray-3;
+@b-metric-behavior-funnel-table__td--cover-color: @color-gray-5;
+
+@b-metric-category-install-info-table__table--fz: 12px;
+@b-metric-category-install-info-table__table--lh: 1.4;
+@b-metric-category-install-info-table__table--font-height: @b-metric-category-install-info-table__table--fz*@b-metric-category-install-info-table__table--lh;
+@b-metric-category-install-info-table__table-marker--top-pad: ceil(@b-metric-alt-marker__marker--size-small - @b-metric-category-install-info-table__table--font-height)/2;
+
+@b-metric-category-table-alt--pad: 60px;
+@b-metric-category-table-alt__app-icon--size: 20%;
+@b-metric-category-table-alt__app-info-val--fz: 16px;
+@b-metric-category-table-alt__app-info-val--lh: 1.1;
+
+@b-metric-install-info-table__table--fz: 12px;
+@b-metric-install-info-table__table--lh: 1.4;
+@b-metric-install-info-table__table-marker--top-pad: ceil(@b-metric-alt-marker__marker--size-small - @b-metric-install-info-table__table--fz*@b-metric-install-info-table__table--lh)/2;
+
+@b-metric-overview-benchmark__btn--size: 26px;
+
+@b-drive-btn--height: 36px;
+@b-drive-btn--size--height: 46px;
+
+@b-metric-overview-summary-alt__h-label--height: 14px;
+@b-metric-overview-summary-alt__marker--size: 25px;
+@b-metric-overview-summary-alt__label--height: @b-metric-overview-summary-alt__marker--size;
+
+@b-metric-overview-summary-alt-preview__icon-play-size: 30px;
+
+@b-metric-overview-summary-alt-preview-android__layout--rem: 14px;
+@b-metric-overview-summary-alt-preview-android__layout--width: 370px;
+@b-metric-overview-summary-alt-preview-android__layout--height: 142px;
+@b-metric-overview-summary-alt-preview-android__layout--color-inactive: #D9D9D9;
+@b-metric-overview-summary-alt-preview-android__layout--color-active: #689F38;
+@b-metric-overview-summary-alt-preview-android__layout-img-wr--width: (110px/@b-metric-overview-summary-alt-preview-android__layout--width)*100%;
+@b-metric-overview-summary-alt-preview-android__layout--pad: (16px/@b-metric-overview-summary-alt-preview-android__layout--width)*100%;
+
+@b-metric-overview-summary-alt-preview-ios__layout--width: 370px;
+@b-metric-overview-summary-alt-preview-ios__layout--height: 142px;
+@b-metric-overview-summary-alt-preview-ios__layout--rem: 14px;
+@b-metric-overview-summary-alt-preview-ios__layout--inactive-color: #D9D9D9;
+@b-metric-overview-summary-alt-preview-ios__layout-img-wr--width: (110px/@b-metric-overview-summary-alt-preview-ios__layout--width)*100%;
+@b-metric-overview-summary-alt-preview-ios__layout-watch-img-wr--width: (24px/@b-metric-overview-summary-alt-preview-ios__layout--width)*100%;
+@b-metric-overview-summary-alt-preview-ios__layout--pad: (16px/@b-metric-overview-summary-alt-preview-ios__layout--width)*100%;
+
+@b-metric-read-more-table__table--fz: 12px;
+@b-metric-read-more-table__table--lh: 1.4;
+@b-metric-read-more-table__table-marker--top-pad: ceil(@b-metric-alt-marker__marker--size-small - @b-metric-read-more-table__table--fz*@b-metric-read-more-table__table--lh)/2;
+
+@b-metric-screenshots-table__video-play--size: 30px;
+
+@b-metric-video-table__table--fz: 12px;
+@b-metric-video-table__table--lh: 1.4;
+@b-metric-video-table__table-marker--top-pad: ceil(@b-metric-alt-marker__marker--size-small - @b-metric-video-table__table--fz*@b-metric-video-table__table--lh)/2;
+
+@b-metric-view-switcher__state--size: 30px;
+@b-metric-view-switcher__state--color-active: #DBDBDB;
+
+@b-metrics-scroll-chart--height: 250px;
+@b-metrics-scroll-chart__img--width: 640px;
+@b-metrics-scroll-chart__img--height: 2276px;
+@b-metrics-scroll-chart__img--ratio: @b-metrics-scroll-chart__img--height / @b-metrics-scroll-chart__img--width;
+@b-metrics-scroll-chart__preview--width: @b-metrics-scroll-chart--height / @b-metrics-scroll-chart__img--ratio;
+
+@b-subscription-plan__h--margin-top: 20px;
+@b-subscription-plan__h--fz: 14px;
+@b-subscription-plan__h--lh: 1.4;
+@b-subscription-plan__h-check-place--width: @b-subscription-plan__h--fz * @b-subscription-plan__h--lh + @b-subscription-plan__h--margin-top;
+@b-subscription-plan__h-check--left: -25px;
+@b-subscription-plan__h-check-img--size: 14px;
+
+@b-tooltip__triangle--size: 8px;
+@b-tooltip__triangle--pad: @b-tooltip__triangle--size+2px;
+@b-tooltip__triangle--bg: rgba(50, 63, 83, 0.85);
+
+@b-billing__field--height: 40px;
+@b-billing__section--pad: @pad*4;
+@b-billing__card-image--height: 22px;
+@b-billing__section--color-invalid: red;
+
+@b-team-form__field--height: 40px;
+
+@b-experiment-integration-appsflyer__img--orig-height: 194px;
+@b-experiment-integration-appsflyer__img--orig-width: 592px;
+@b-experiment-integration-appsflyer__btn--height: 30px;
+
+@b-form-mark-label__dot--pad: @pad*2;
+@b-form-mark-label__dot--size: 18px;
+@b-form-mark-label__dot--fz: 14px;
+@b-form-mark-label__dot--lh: 1.4;

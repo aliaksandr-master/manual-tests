@@ -1,0 +1,348 @@
+@import "./config";
+@import "../../../node_modules/hless/lib/index";
+
+._modal-h () {
+    background-color: #E9EDF3;
+    display: block;
+    font-size: 21px;
+    line-height: 1.4;
+    padding: @pad*7 @pad*8 @pad*4;
+}
+
+._modal-content () {
+    padding: @pad*4 @pad*8 @pad*4;
+    font-size: 16px;
+    line-height: 1.4;
+    border-top: 1px solid @color-gray-2;
+}
+
+._modal-btn-footer () {
+    display: block;
+    padding: @pad*4 @pad*8 @pad*4;
+    text-align: right;
+}
+
+._page-in () {
+    display: block;
+    max-width: @layout--max-width;
+    margin: 0 auto;
+    padding-left: @pad*4;
+    padding-right: @pad*4;
+
+    @media print {
+        width: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+._page-h1 () {
+    font-size: 24px;
+    line-height: 1.4;
+    min-height: 1.4em;
+    font-weight: bold;
+}
+
+._page-head () {
+    display: block;
+    background: @color-blue-light-3;
+    padding-top: @pad*10;
+    margin-bottom: @pad*12;
+    ._clearfix();
+}
+
+._page-body () {
+    display: block;
+    padding-bottom: @pad*12;
+    ._clearfix();
+
+    @media print {
+        width: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+._maximize-height () {
+    padding-bottom: 99999px;
+    margin-bottom: -99999px;
+}
+
+._aside-header () {
+    padding: 30px 1em 12px @pad*6;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #4a5667;
+}
+
+._aside-link () {
+    display: block;
+    position: relative;
+    font-size: 16px;
+    color: #8fa3bb;
+    padding: 15px 1em 15px @pad*6;
+    text-decoration: none;
+}
+
+._aside-menu-rounds () {
+    &:before {
+        content: '';
+        width: 3px;
+        height: 3px;
+        position: absolute;
+        display: block;
+        bottom: 100%;
+        right: 0;
+        background: radial-gradient(ellipse at 0 0, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 40%, white 60%);
+        background-size: contain;
+    }
+
+    &:after {
+        content: '';
+        width: 3px;
+        height: 3px;
+        position: absolute;
+        display: block;
+        top: 100%;
+        right: 0;
+        background: radial-gradient(ellipse at 0 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 40%, white 60%);
+        background-size: contain;
+    }
+}
+
+._traffic-campaign-form-container (@bg: @color-light-blue) {
+    background: @bg;
+    margin: 0 auto;
+    max-width: 500px;
+    padding: 40px;
+}
+
+._traffic-campaign-form-buttons-wr () {
+    text-align: center;
+    margin: @pad*6 0 @pad*10;
+}
+
+._section-h1 () {
+    font-size: 24px;
+    line-height: 1.7;
+    margin: 0 0 @pad*4;
+}
+
+._section-h2 () {
+    font-size: 20px;
+    line-height: 1.4;
+    margin: 0 0 @pad*4;
+}
+
+._analytics-metric-in () {
+    display: block;
+    max-width: @b-analytics__body--max-width;
+    margin: 0 auto @pad*12;
+    padding: 0 @pad*4;
+}
+
+._analytics-metric__h () {
+    font-weight: bold;
+    line-height: 1.2;
+    font-size: 14px;
+    margin-bottom: @pad;
+}
+
+._analytics-metric__h2 () {
+    color: @color-muted;
+    line-height: 1.2;
+    font-size: 14px;
+    margin-bottom: @pad*4;
+}
+
+._analytics-metric__table-head () {
+    background-color: @b-analytics__table-head--bg;
+
+    > tr > td {
+        border: 1px solid @b-analytics__table--color-gray-light;
+        border-bottom-color: @b-analytics__table--color-gray-light;
+        border-top-color: @b-analytics__table--color-gray-dark;
+        color: @b-analytics__table-text-head--color;
+        font-size: 12px;
+        line-height: 1;
+        padding: @b-analytics__table-head--pad @pad*2 @pad*2;
+        vertical-align: bottom;
+        white-space: nowrap;
+
+        &:first-child {
+            border-left-color: @b-analytics__table--color-gray-dark;
+        }
+
+        &:last-child {
+            border-right-color: @b-analytics__table--color-gray-dark;
+        }
+    }
+
+    > tr:last-child > td {
+        border-bottom-color: @b-analytics__table--color-gray-dark;
+    }
+}
+
+._analytics-metric__table-body () {
+    > tr > td {
+        border: 1px solid @b-analytics__table--color-gray-light;
+        color: black;
+        font-size: 12px;
+        line-height: 1;
+        padding: @pad*2 @pad*2;
+    }
+
+    > tr > td:first-child {
+        border-left-color: @b-analytics__table--color-gray-dark;
+    }
+
+    > tr > td:last-child {
+        border-right-color: @b-analytics__table--color-gray-dark;
+    }
+
+    > tr:last-child > td {
+        border-bottom-color: @b-analytics__table--color-gray-dark;
+    }
+}
+
+._b-dashboard-aside() {
+    border: 1px solid @form-border;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+._b-sequence-step(@count) {
+    margin-left: auto;
+    margin-right: auto;
+
+    &:before {
+        width: ((@count - 1) / @count) * 100%;
+    }
+
+    > .b-sequence-step {
+        width: (1 / @count) * 100%;
+    }
+}
+
+._label () {
+    background: transparent;
+    color: inherit;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+._input () {
+    color: inherit;
+    background-color: #fff;
+    border: 1px solid @color-gray-3;
+    box-sizing: border-box;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: 0 @pad*2;
+    font-size: 14px;
+    width: 100%;
+
+    &:focus {
+        border-color: @color-gray-4;
+        background-color: #fff;
+        outline: none;
+    }
+
+    &:read-only,
+    &:disabled {
+        color: @color-muted;
+        background-color: @color-gray-2;
+    }
+
+    .ng-submited &.ng-invalid,
+    &.ng-invalid.ng-touched {
+        color: @color-red-4;
+        border-color: @color-red-4;
+    }
+}
+
+._select () {
+    background-color: #fff;
+    border: 1px solid @color-gray-3;
+    box-sizing: border-box;
+    color: inherit;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: @pad*2;
+
+    &:focus {
+        border-color: @color-gray-4;
+        outline: none;
+    }
+
+    &:disabled {
+        color: @color-muted;
+        background-color: @color-gray-2;
+    }
+}
+
+._area () {
+    background-color: #fff;
+    border: 1px solid @color-gray-3;
+    box-sizing: border-box;
+    color: inherit;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    padding: @pad*2;
+    max-width: 100%;
+    width: 100%;
+
+    &:focus {
+        border-color: @color-gray-4;
+        outline: none;
+    }
+
+    &:read-only,
+    &:disabled {
+        color: @color-muted;
+        background-color: @color-gray-2;
+    }
+
+    .ng-submited &.ng-invalid,
+    &.ng-invalid.ng-touched {
+        color: @color-red-4;
+        border-color: @color-red-4;
+    }
+}
+
+._upload-dsc () {
+    color: @color-muted;
+    display: block;
+    font-size: 12px;
+    padding-bottom: @pad;
+}
+
+._drop-area () {
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    background: #fdfdfd;
+    border: 1px dashed @color-muted-light;
+    padding: @pad*3;
+    border-radius: 2px;
+    cursor: pointer;
+
+    &:hover {
+        border-color: @color-gray-6;
+    }
+}
+
+._drop-area-disabled () {
+    color: @color-muted;
+    background-color: @color-gray-2;
+    cursor: default;
+
+    &:hover {
+        border-color: @color-muted-light;
+    }
+}

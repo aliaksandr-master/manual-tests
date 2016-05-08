@@ -1,0 +1,55 @@
+@import "../../styles/base/mixins";
+@import "../../../node_modules/ng-tags-input/build/ng-tags-input.css";
+
+tags-input {
+
+    > .host {
+        margin: 0;
+        min-height: 40px; // because can be a lot of inputs
+
+        > .tags {
+            border: 1px solid @color-gray-3;
+            padding: 2px;
+            box-shadow: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            outline: none;
+            min-height: 40px;
+
+            &.focused {
+                border-color: @color-gray-4;
+                outline: none;
+            }
+
+            .input {
+                height: 30px;
+                line-height: 30px;
+            }
+
+            > .tag-list {
+
+                > .tag-item {
+                    background: @color-gray-8 none;
+                    border-color: @color-gray-10;
+                    color: white;
+                    text-shadow: none;
+                    height: 30px;
+                    line-height: 30px;
+
+                    &.selected {
+                        border-color: @color-red-3;
+                    }
+
+                    .remove-button {
+                        color: white;
+
+                        &:hover {
+                            text-decoration: none;
+                            opacity: 0.7;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
