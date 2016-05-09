@@ -53,11 +53,12 @@ gulp.task('dev', 'dev server. open page in main browser', [
 gulp.task('release', 'release the project', (callback) => gulpRunSequence(
   'test',
   task('release/clean'),
-  task('release/build-bundle'),
+  task('release/make-bundle'),
   [
     task('release/minify-styles'),
     task('release/minify-scripts')
   ],
+  task('release/make-desktop-app'),
   callback
 ), {
   options: {

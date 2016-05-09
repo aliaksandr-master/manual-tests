@@ -9,20 +9,12 @@
 *.zip
 *.vi
 *~
-
-# OS folders
 .DS_Store
 ._*
 Thumbs.db
 
-# Folders to ignore
-.hg
-.svn
-.CVS
-.idea
-
-node_modules
-dist
-.tmp
-app/bower_components
-app--release/
+.idea/
+node_modules/
+.tmp/
+app--build/
+app--package/
