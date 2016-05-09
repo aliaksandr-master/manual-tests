@@ -33,7 +33,7 @@ gulp.task('cleanup', [
 gulp.task('test', 'test code of the project', [
   task('test/app-scripts'),
   task('test/app-styles'),
-  // task('test/app-templates'),
+  task('test/app-templates'),
   task('test/sys-scripts')/*,
   task('test/package')*/
 ]);
@@ -52,17 +52,12 @@ gulp.task('dev', 'dev server. open page in main browser', [
 
 gulp.task('release', 'release the project', (callback) => gulpRunSequence(
   'test',
-  task('release/confirm'),
   task('release/clean'),
-  task('release/concat-scripts'),
   task('release/build-bundle'),
   [
     task('release/minify-styles'),
     task('release/minify-scripts')
   ],
-  task('release/revision'),
-  task('release/deploy-s3'),
-  task('release/deploy-server'),
   callback
 ), {
   options: {

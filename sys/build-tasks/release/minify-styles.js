@@ -4,7 +4,6 @@
 
 const gulp = require('gulp');
 const gulpCssComb = require('gulp-csscomb');
-const gulpBemStat = require('../../gulp-tasks/gulp-bem-stat');
 const fmap = require('../../gulp-utils/fmap');
 const options = require('../../config');
 const gulpCSSO = require('gulp-csso');
@@ -17,5 +16,4 @@ module.exports = (callback) =>
       sourceMap: false,
       debug: true
     }))
-    .pipe(gulpBemStat({ suffix: options.BEM_STAT_SUF }))
     .pipe(gulp.dest(options.DIR_RELEASED));

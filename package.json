@@ -138,6 +138,7 @@
   "scripts": {
     "test": "node_modules/.bin/gulp test --no-test-cache --test-mode=strict",
     "dev": "node_modules/.bin/gulp dev",
+    "release": "node_modules/.bin/gulp release --target=prod",
     "cleanup": "npm prune && npm i && node_modules/.bin/gulp cleanup",
     "prepush": "npm test",
     "precommit": "node_modules/.bin/gulp test --no-test-cache --test-mode=strict --test-tracked=true",
