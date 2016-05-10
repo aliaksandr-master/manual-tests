@@ -4,7 +4,6 @@
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
-const fse = require('fs-extra');
 
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -15,10 +14,7 @@ const postCssSlectorNot = require('postcss-selector-not');
 const options = require('./sys/config');
 const config = {};
 const DIR_CWD = options.DIR_CWD;
-const isDev = !options.ENV_PROD;
-
-fse.ensureDirSync(options.DIR_BABEL_CACHE_DIR);
-fse.ensureDirSync(options.DIR_WEBPACK);
+const isDev = options.DEV_MODE;
 
 const pathToRegExp = (absPathStr) => {
   if (!fs.lstatSync(absPathStr).isFile()) {

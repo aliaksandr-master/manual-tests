@@ -18,9 +18,9 @@ angular
       },
 
       views: {
-        '': {
+        'app': {
           template:
-            '',
+            '<h1>HELLO!</h1>',
           controllerAs: 'appMainCtrl',
 
           /*@ngInject*/

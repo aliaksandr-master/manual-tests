@@ -19,12 +19,9 @@ angular
       },
 
       template:
-        `<b-app
-          data-user="appCtrl.user"
-          data-user-team-owner="appCtrl.userTeamOwner"
-          data-user-team-other="appCtrl.userTeamOther"
-          data-user-team-invites="appCtrl.userTeamInvites"
-        ></b-app>`,
+        `<div>
+            <div ui-view="app"></div>
+        </div>`,
       controllerAs: 'appCtrl',
 
       /*@ngInject*/

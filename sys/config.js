@@ -5,10 +5,11 @@
 const arg = require('./utils/arg');
 const path = require('path');
 const pkg = require('../package.json');
+const fse = require('fs-extra');
 const cfg = exports;
 
 cfg.ENV = arg.get('target', 'dev', [ 'dev', 'prod' ]);
-cfg.ENV_PROD = cfg.ENV === 'prod';
+cfg.DEV_MODE = arg.get('_')[0] !== 'release';
 cfg.PACKAGE = pkg;
 cfg.DEV_SERVER_PORT = 9000;
 
@@ -42,3 +43,9 @@ cfg.DIR_WEBPACK = cfg.DIR_CWD + '/.tmp/webpack';
 
 cfg.DIR_NW_CACHE = cfg.DIR_CWD + '/.tmp/nw-cache';
 cfg.DIR_NW_BUILD = cfg.DIR_CWD + '/app--package';
+
+fse.ensureDirSync(cfg.DIR_BABEL_CACHE_DIR);
+fse.ensureDirSync(cfg.DIR_NW_BUILD);
+fse.ensureDirSync(cfg.DIR_NW_CACHE);
+fse.ensureDirSync(cfg.DIR_WEBPACK);
+fse.ensureDirSync(cfg.DIR_TEST_CACHE);

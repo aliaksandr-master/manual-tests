@@ -2,7 +2,6 @@
 /*eslint-disable no-console*/
 'use strict';
 
-const fse = require('fs-extra');
 const gulpIf = require('gulp-if');
 const fmap = require('../../gulp-utils/fmap');
 const GulpFileCache = require('gulp-file-cache');
@@ -12,8 +11,6 @@ const gulpGitStatusFilter = require('gulp-git-status-filter');
 const options = require('../../config');
 
 module.exports = (callback) => {
-  fse.ensureDirSync(options.DIR_TEST_CACHE);
-
   const fileCache = new GulpFileCache(options.FILE_TEST_CACHE);
   const gitStatusFilter = gulpGitStatusFilter({ tracked: true, staged: true, enabled: options.TEST_ONLY_TRACKED });
 
