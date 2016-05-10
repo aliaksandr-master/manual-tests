@@ -40,5 +40,5 @@ cfg.BEM_STAT_SUF = '--bem-stat.json';
 cfg.DEFAULT_AUTH_TOKEN = 'cd14452afb8bd7e410b8ce7ee4b17a2c9ba884ec';
 cfg.DIR_WEBPACK = cfg.DIR_CWD + '/.tmp/webpack';
 
-cfg.DIR_NW_CACHE = cfg.DIR_CWD + '/.tmp/nw/cache';
+cfg.DIR_NW_CACHE = cfg.DIR_CWD + '/.tmp/nw-cache';
 cfg.DIR_NW_BUILD = cfg.DIR_CWD + '/app--package';

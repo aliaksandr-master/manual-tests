@@ -19,7 +19,7 @@ module.exports = (callback) => {
   const webpackDevServer = new WebpackDevServer(compiler, config.devServer);
   const app = webpackDevServer.app;
 
-  app.get(/^\/app\.html/, contentPipeLineMiddlware(options.DIR_CWD + '/' + options.DIR_SRC, [
+  app.get(/\.html\??[^#]*#?.*$/, contentPipeLineMiddlware(options.DIR_CWD + '/' + options.DIR_SRC, [
     gulpConcat.replaceScripts
   ]));
 
