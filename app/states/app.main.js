@@ -14,19 +14,21 @@ angular
       url: '/main',
 
       resolve: {
-
+        /*@ngInject*/
+        _test: ($window) => $window.nw.allData()
       },
 
       views: {
         'app': {
           template:
-            '<h1>HELLO!</h1>',
+            '<h1>HELLO! {{ appMainCtrl.data }}</h1>',
           controllerAs: 'appMainCtrl',
 
           /*@ngInject*/
-          controller () {
-            // const vm = this;
+          controller (_test) {
+            const vm = this;
 
+            vm.data = _test;
           }
         }
       }

@@ -2,8 +2,16 @@
 /*eslint-disable no-console*/
 'use strict';
 
-const clean = require('../../gulp-utils/clean');
+const gulp = require('gulp');
+const del = require('del');
+const vinylPaths = require('vinyl-paths');
 const options = require('../../config');
+const fmap = require('../../gulp-utils/fmap');
 
 module.exports = (callback) =>
-  clean(options.DIR_RELEASED);
+  gulp
+    .src(fmap(options.DIR_RELEASED, [
+      '**/*',
+      '!node_modules/**/*'
+    ]), { read: false })
+    .pipe(vinylPaths(del));

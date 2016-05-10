@@ -13,10 +13,6 @@ cfg.DEV_MODE = arg.get('_')[0] !== 'release';
 cfg.PACKAGE = pkg;
 cfg.DEV_SERVER_PORT = 9000;
 
-cfg.BUILD_APP = arg.flag('build-app', true);
-cfg.BUILD_STATIC = arg.flag('build-static', false);
-cfg.BUILD_PUBLIC_ANALYTICS = arg.flag('build-public-analytics', false);
-
 cfg.TEST_CACHE = arg.flag('test-cache', true);
 cfg.TEST_MODE = arg.get('test-mode', 'confidence', [ 'strict', 'confidence' ]);
 cfg.TEST_ONLY_TRACKED = arg.flag('test-tracked', false);

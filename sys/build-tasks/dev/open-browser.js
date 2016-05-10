@@ -17,10 +17,10 @@ module.exports = (callback) => {
     query.proxy = options.PROXY_PORT;
   }
 
-  const urlParams = url.parse('http://localhost:' + options.DEV_SERVER_PORT + '/app.html');
+  const urlParams = url.parse('http://localhost:' + options.DEV_SERVER_PORT + '/app--web.html');
 
   return gulp.src([
-    options.DIR_SRC + '/app.html'
+    options.DIR_SRC + '/app--web.html'
   ], { read: false })
     .pipe(gulpOpen({ uri: url.format(urlParams) }));
 };

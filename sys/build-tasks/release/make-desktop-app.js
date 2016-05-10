@@ -4,10 +4,14 @@
 
 const options = require('../../config');
 const NwBuilder = require('nw-builder');
+const fmap = require('../../gulp-utils/fmap');
 
 module.exports = (callback) => {
   const nw = new NwBuilder({
-    files: options.DIR_CWD + '/' + options.DIR_RELEASED + '/**/*',
+    files: fmap(options.DIR_CWD, [
+      'package.json',
+      options.DIR_RELEASED + '/**/*'
+    ]),
     buildDir: options.DIR_NW_BUILD,
     cacheDir: options.DIR_NW_CACHE,
     platforms: [ 'linux64' ],
@@ -16,14 +20,13 @@ module.exports = (callback) => {
 
   nw.on('log', (...args) => console.log(...args));
 
-  // Build returns a promise
-  nw.build()
+  return nw.build()
     .then(() => {
       console.log('all done!');
     })
     .catch((error) => {
       console.error(error);
-    });
 
-  callback();
+      return Promise.reject(error);
+    });
 };
