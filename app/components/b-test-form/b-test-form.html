@@ -1,0 +1,19 @@
+<form name="bTestForm.form" class="b-test-form">
+  <!--bTestForm-->
+
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" ng-model="bTestForm.test.name" ng-required="true" ng-minlength="3" ng-maxlength="255" ng-trim="true" />
+  </div>
+
+  <div class="form-group">
+    <label>Count of Questions</label>
+    <input type="number" step="1" min="10" max="100" class="form-control" ng-model="bTestForm.test.count" ng-required="true" ng-minlength="1" ng-maxlength="3" ng-trim="true" />
+  </div>
+
+  <a href="" ng-click="bTestForm.remove()">remove</a>
+
+  <button ng-click="bTestForm.save()" class="btn btn-primary" ng-disabled="bTestForm.form.$invalid">
+    {{ bTestForm.test._id ? 'Save Test Params' : 'Create New Test' }}
+  </button>
+</form>

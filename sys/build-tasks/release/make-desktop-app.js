@@ -4,29 +4,32 @@
 
 const options = require('../../config');
 const NwBuilder = require('nw-builder');
-const fmap = require('../../gulp-utils/fmap');
+const childProcess = require('child_process');
 
 module.exports = (callback) => {
+  const command = 'cp -rf ' + options.DIR_CWD + '/node_modules ' + options.DIR_CWD + '/' + options.DIR_RELEASED + '/node_modules';
+
+  childProcess.execSync(command);
+
   const nw = new NwBuilder({
-    files: fmap(options.DIR_CWD, [
-      'package.json',
-      options.DIR_RELEASED + '/**/*'
-    ]),
+    files: [
+      options.DIR_CWD + '/' + options.DIR_RELEASED + '/**/*'
+    ],
+    zip: false,
     buildDir: options.DIR_NW_BUILD,
     cacheDir: options.DIR_NW_CACHE,
-    platforms: [ 'linux64' ],
+    buildType: 'default',
+    platforms: [ 'linux64'/*, 'win32', 'win64'*/ ],
+    appName: 'test',
+    appVersion: options.PACKAGE.version,
     version: '0.12.3'
   });
 
-  nw.on('log', (...args) => console.log(...args));
+  nw.on('log',  console.log);
 
-  return nw.build()
-    .then(() => {
-      console.log('all done!');
-    })
-    .catch((error) => {
-      console.error(error);
-
-      return Promise.reject(error);
-    });
+  return nw.build().then(() => {
+    console.log('all done!');
+  }).catch((error) => {
+    console.error(error);
+  });
 };

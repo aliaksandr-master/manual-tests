@@ -8,6 +8,9 @@ const fmap = require('../../gulp-utils/fmap');
 const options = require('../../config');
 
 module.exports = (callback) =>
-  gulp.src(fmap(options.DIR_RELEASED, [ '**/*.js' ]), { base: options.DIR_RELEASED })
+  gulp.src(fmap(options.DIR_RELEASED, [
+    '**/*.js',
+    '!node_modules/**/*'
+  ]), { base: options.DIR_RELEASED })
     .pipe(gulpUglify())
     .pipe(gulp.dest(options.DIR_RELEASED));

@@ -15,18 +15,20 @@ angular
       abstract: true,
 
       resolve: {
-
+        /*@ngInject*/
+        _user (SessionStore) {
+          return SessionStore.get();
+        }
       },
 
-      template:
-        `<div>
-            <div ui-view="app"></div>
-        </div>`,
+      template: '<b-app data-user="appCtrl.user"></b-app>',
       controllerAs: 'appCtrl',
 
       /*@ngInject*/
-      controller () {
-        // const vm = this;
+      controller (_user) {
+        const vm = this;
+
+        vm.user = _user;
       }
     });
   });

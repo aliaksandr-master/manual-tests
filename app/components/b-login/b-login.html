@@ -1,0 +1,15 @@
+<form class="b-login" name="bLogin.form">
+  <div class="form-group">
+    <label for="b-login__first-name">First Name</label>
+    <input type="text" id="b-login__first-name" class="form-control" ng-model="bLogin.firstName" ng-required="true" ng-minlength="3" ng-maxlength="255" ng-trim="true" />
+  </div>
+  <div class="form-group">
+    <label for="b-login__last-name">Last Name</label>
+    <input type="text" id="b-login__last-name" class="form-control" ng-model="bLogin.lastName" ng-required="true" ng-minlength="3" ng-maxlength="255" ng-trim="true" />
+  </div>
+  <div class="form-group">
+    <label for="b-login__group">Group</label>
+    <input type="text" id="b-login__group" class="form-control" ng-model="bLogin.group" ng-required="true" ng-minlength="3" ng-maxlength="255" ng-trim="true" />
+  </div>
+  <button type="submit" class="btn btn-primary" ng-click="bLogin.submit()" ng-disabled="bLogin.form.$invalid">Submit</button>
+</form>

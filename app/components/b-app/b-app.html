@@ -1,0 +1,41 @@
+<div>
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div ng-if="bApp.user" id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li ui-sref-active="active">
+            <a href="" ui-sref="app.tests">Tests</a>
+          </li>
+          <li ui-sref-active="active">
+            <a href="" ui-sref="app.questions">Questions</a>
+          </li>
+          <li>
+            <a href="">{{ bApp.user.firstName }} {{ bApp.user.lastName }} {{ bApp.user.group }}</a>
+          </li>
+          <li>
+            <a href="" ng-click="bApp.logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" ng-if="!bApp.user">
+    <div class="jumbotron">
+      <b-login class="b-app__login"></b-login>
+    </div>
+  </div>
+
+  <div class="container" ng-if="bApp.user">
+    <div class="jumbotron" ui-view="app">
+    </div>
+  </div>
+</div>

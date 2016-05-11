@@ -9,7 +9,11 @@ const options = require('../../config');
 const gulpCSSO = require('gulp-csso');
 
 module.exports = (callback) =>
-  gulp.src(fmap(options.DIR_RELEASED, [ '**/*.css' ]), { base: options.DIR_RELEASED })
+  gulp
+    .src(fmap(options.DIR_RELEASED, [
+      '**/*.css',
+      '!node_modules/**/*'
+    ]), { base: options.DIR_RELEASED })
     .pipe(gulpCssComb())
     .pipe(gulpCSSO({
       restructure: true,

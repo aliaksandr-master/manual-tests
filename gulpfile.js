@@ -53,12 +53,23 @@ gulp.task('dev', 'dev server. open page in main browser', [
 gulp.task('release', 'release the project', (callback) => gulpRunSequence(
   'test',
   task('release/clean'),
-  task('release/make-bundle'),
-  task('release/collect-app-files'),
+  'release-part',
   [
     task('release/minify-styles'),
     task('release/minify-scripts')
   ],
   task('release/make-desktop-app'),
+  callback
+));
+
+
+
+
+gulp.task('release-part', (callback) => gulpRunSequence(
+  [
+    task('release/make-bundle'),
+    task('release/collect-app-files'),
+    task('release/collect-api-files')
+  ],
   callback
 ));

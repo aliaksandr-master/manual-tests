@@ -1,0 +1,17 @@
+<div class="b-tests">
+  <!--bTests-->
+  <ul>
+    <li ng-repeat="_test in bTests.tests track by _test._id">
+      <a href="" ui-sref="app.test-form({ testId: _test._id })">
+        #{{ _test._id }}
+        <b>{{ _test.name }}</b>
+        {{ _test.count }}
+        <i ng-repeat="_tag in _test.tags track by $index">{{ _tag }},</i>
+      </a>
+    </li>
+  </ul>
+
+  <div ng-if="!bTests.tests.length">No tests available</div>
+
+  <a class="btn btn-primary" ui-sref="app.test-form" href="">Create New Test</a>
+</div>

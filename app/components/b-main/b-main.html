@@ -1,0 +1,9 @@
+<div class="b-main">
+  <ul>
+    <li ng-repeat="_test in bMain.tests track by _test._id">
+      <a href="" ui-sref="app.test({ testId: _test._id })">{{ _test.name }} ({{ _test.count }})</a>
+    </li>
+  </ul>
+
+  <div ng-if="!bMain.tests.length">No tests available</div>
+</div>

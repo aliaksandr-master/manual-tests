@@ -12,6 +12,7 @@ module.exports = (callback) =>
   gulp
     .src(fmap(options.DIR_RELEASED, [
       '**/*',
+      '!run/**/*',
       '!node_modules/**/*'
     ]), { read: false })
     .pipe(vinylPaths(del));

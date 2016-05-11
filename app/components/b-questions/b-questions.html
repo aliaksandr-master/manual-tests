@@ -1,0 +1,18 @@
+<div class="b-questions">
+  <!--bQuestions-->
+  <a class="btn btn-primary" ui-sref="app.question-form" href="">Create New Question</a>
+
+  <ul>
+    <li ng-repeat="_question in bQuestions.questions track by _question._id">
+      <a href="" ui-sref="app.question-form({ questionId: _question._id })">
+        #{{ _question._id }}
+        <b>{{ _question.question }}</b>
+        ({{ _question.variants.length }})
+        <i ng-repeat="_tag in _question.tags track by $index">{{ _tag }},</i>
+      </a>
+    </li>
+  </ul>
+
+  <div ng-if="!bQuestions.tests.length">No questions available</div>
+
+</div>

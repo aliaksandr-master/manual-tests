@@ -6,11 +6,14 @@ const gulp = require('gulp');
 const options = require('../../config');
 const fmap = require('../../gulp-utils/fmap');
 
+let files = fmap(options.DIR_SRC,  [
+  'app.html',
+  'server.js'
+]);
+
+files = files.concat([ 'package.json' ]);
+
 module.exports = (callback) =>
   gulp
-    .src(fmap(options.DIR_SRC,  [
-      'app.html',
-      'nw-api.js',
-      'server.js'
-    ]), { base: options.DIR_SRC })
+    .src(files)
     .pipe(gulp.dest(options.DIR_RELEASED));

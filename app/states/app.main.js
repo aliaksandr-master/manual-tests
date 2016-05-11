@@ -15,20 +15,21 @@ angular
 
       resolve: {
         /*@ngInject*/
-        _test: ($window) => $window.nw.allData()
+        _tests (TestStore) {
+          return TestStore.getActiveTests();
+        }
       },
 
       views: {
-        'app': {
-          template:
-            '<h1>HELLO! {{ appMainCtrl.data }}</h1>',
+        'app@app': {
+          template: '<b-main data-tests="appMainCtrl.tests"></b-main>',
           controllerAs: 'appMainCtrl',
 
           /*@ngInject*/
-          controller (_test) {
+          controller (_tests) {
             const vm = this;
 
-            vm.data = _test;
+            vm.tests = _tests;
           }
         }
       }

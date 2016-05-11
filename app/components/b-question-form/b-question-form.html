@@ -1,0 +1,30 @@
+<div class="b-question-form">
+  <!--bQuestionForm-->
+
+  <div class="form-group">
+    <label>Type</label>
+    <select ng-model="bQuestionForm.question.type" ng-options="_option._id as _option.name for _option in bQuestionForm.types"></select>
+  </div>
+
+  <div class="form-group">
+    <label>Question</label>
+    <textarea type="text" class="form-control" ng-model="bQuestionForm.question.question" ng-required="true" ng-minlength="3" ng-maxlength="255" ng-trim="true"></textarea>
+  </div>
+
+  <div ng-repeat="_variant in bQuestionForm.question.variants track by $index" class="form-group">
+    <label>{{ $index }}. Variant:</label>
+    <input type="text" class="form-control" ng-model="bQuestionForm.question.variants[$index]" ng-required="true" ng-minlength="3" ng-maxlength="255" ng-trim="true" />
+    <a href="" ng-click="bQuestionForm.removeVariant($index);">delete this variant</a>
+    <input type="checkbox" ng-change="" />
+  </div>
+
+  <div class="form-group">
+    <button type="button" class="btn btn-default" ng-click="bQuestionForm.question.variants.push('')">Add One More Variant</button>
+  </div>
+
+  <div class="form-group">
+    <button ng-click="bQuestionForm.save()" class="btn btn-primary" ng-disabled="bQuestionForm.form.$invalid || bQuestionForm.question.variants.length < 2">
+      {{ bQuestionForm.question._id ? 'Save Question' : 'Create Question' }}
+    </button>
+  </div>
+</div>
