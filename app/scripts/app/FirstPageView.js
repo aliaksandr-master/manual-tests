@@ -14,23 +14,42 @@ window.FirstPageView = window.PageView.extend({
 	template: window.getTemplate('main'),
 
 	_prepareValue: function (selector, min, max, message) {
-		var str = this.el(selector).val().replace(/^\s*|\s*$/, ''),
-			num = Number(str);
+		var num = Number(this.el(selector).val().trim());
 
 		if (!/^\d+$/.test(num) || num < min || num > max) {
-			alert(message.replace('%min%', min).replace('%max%', max));
-			return false;
+			throw new Error(message.replace('%min%', min).replace('%max%', max).replace('%num%', num));
 		}
 
 		return num;
 	},
 
 	update: function (e) {
-		var variant = this._prepareValue('#test-variant', this.model.minVariants, this.model.maxVariants, 'Вариант не должен быть меньше %min% и больше %max%');
-		var count   = this._prepareValue('#test-question-count', 1, Math.floor(this.model.allQuestions.length / this.model.maxVariants), 'Количество вопросов не должно быть меньше чем %min% и больше чем %max%');
-		var error   = this._prepareValue('#test-errors', 0, count, 'Количество ошибок не должно быть меньше чем %min% и больше чем %max%');
+		var variant;
+		var count;
+		var error;
 
-		if (error === false || count === false || variant === false) {
+		try {
+			// variant = this._prepareValue(
+			// 	'#test-variant',
+			// 	0,
+			// 	this.model.variants,
+			// 	'Вариант не должен быть меньше %min% и больше %max%'
+			// );
+			variant = Math.floor(_.random(0, this.model.variants-1));
+			count = this._prepareValue(
+				'#test-question-count',
+				1,
+				Math.floor(this.model.allQuestions.length / this.model.variants),
+				'Количество вопросов не должно быть меньше чем %min% и больше чем %max%, %num%'
+			);
+			error = this._prepareValue(
+				'#test-errors',
+				0,
+				count,
+				'Количество ошибок не должно быть меньше чем %min% и больше чем %max%'
+			);
+		} catch (e) {
+			alert(e.message);
 			return;
 		}
 

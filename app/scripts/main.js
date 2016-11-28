@@ -1,61 +1,80 @@
 "use strict";
 
 $(function () {
-	if (!Object.create) {
-		Object.create = function (data) {
-			var Surrogate = function () {};
-			Surrogate.prototype = data;
-			return new Surrogate();
-		};
-	}
+	var allQuestions = window.getQuestions();
+	var MAX_QUESTIONS_IN_TEST = 20;
 
-	var random = function (from, to, without) {
-		var v = Math.floor(Math.random() * to) + from;
-		if (_.contains(without, v)) {
-			return random(from, to, without);
-		}
-		return v;
-	};
-
-	var randomValuesArray = function (from, to) {
-		var arr = [];
-		for (var i = from; i < to; i ++) {
-			arr.push(random(from, to, arr));
-		}
-		return arr;
-	};
+	allQuestions = allQuestions.slice(0, Math.floor(allQuestions.length / MAX_QUESTIONS_IN_TEST)*MAX_QUESTIONS_IN_TEST);
 
 	var test = {
-		minVariants: 1,
-		maxVariants: 5,
-		allQuestions: window.getQuestions(),
+		variants: Math.floor(allQuestions.length / MAX_QUESTIONS_IN_TEST),
+		allQuestions: allQuestions,
 		questions: [],
 		errors: [],
-		defaultVariant: {
-			errors: 0,
-			count: 10
-		},
-		userAnswers: []
+		userAnswers: [],
+		tags: []
 	};
 
-	test.defaultVariant.count = window.Math.floor(test.allQuestions.length / test.maxVariants);
+	var qByTag = {};
+	_.each(test.allQuestions, function (q) {
+		if (!q.tags || !q.tags.length) {
+			return;
+		}
+
+		var tag = String(q.tags[0]).trim();
+
+		if (_.isEmpty(qByTag[tag])) {
+			qByTag[tag] = [];
+		}
+
+		qByTag[tag].push(q);
+	});
+
+	test.tags = _.keys(qByTag);
+
+	var qByTagArr = _.sortBy(_.values(qByTag), function (v) {
+		return v.length;
+	});
+
+	var variants = _.range(test.variants);
+
+	var allQuestionsOrderedByTag = _.map(_.flatten(qByTagArr), function (q, i) {
+		q.index = i;
+
+		return q;
+	});
+
+	var qTagByVariants = _.map(variants, function (variant) {
+		return _.filter(allQuestionsOrderedByTag, function (question, questionIndex) {
+			var index = questionIndex;
+
+			if (index / variants.length >= 1) {
+				index = index - Math.floor(index / variants.length) * variants.length;
+			}
+
+			return index === variant;
+		});
+	});
 
 	window.FirstPageView.create(test, function (test) {
-		var countPerVariant = window.Math.floor(test.allQuestions.length / test.maxVariants);
-		var start = countPerVariant * (test._variant.variant - test.minVariants);
-		test.questions = test.allQuestions.splice(start, test._variant.count);
+		test.questions = qTagByVariants[test.variant].slice(0, test._variant.count);
 
-		window.console && console.log(test.questions.length + '/' + test.allQuestions.length, '[' + start + ',' + (start + test._variant.count) + ']', test._variant);
+		test.questions = _.shuffle(test.questions);
+
+		window.console && console.log(
+			test.variant,
+			test.questions.length + '/' + test.allQuestions.length,
+			'[' + test.questions.map(function (q) { return q.index }).join(', ') + ']'
+		);
 
 		var prev = null;
 		_.each(test.questions, function (question, index) {
-			var currentTest = Object.create(test);
+			var currentTest = _.create(test);
 
 			_.extend(currentTest, question);
 			currentTest.currentNumber = index;
 			currentTest.counter = index+1;
 			currentTest.total = test.questions.length;
-
 
 			if (!prev) {
 				prev = $.when(true);
@@ -64,12 +83,17 @@ $(function () {
 			prev = prev.then(function () {
 				var deferred = $.Deferred();
 
-				var keys = _.keys(currentTest.answers);
-				currentTest.sequence = _.map(randomValuesArray(0, keys.length), function (num) {
-					return currentTest.answers[keys[num]];
-				});
+				currentTest.sequence = _.shuffle(_.values(currentTest.answers));
 
-				console.log(currentTest.sequence);
+				if (/test-debug/.test(window.location.hash)) {
+					console.log(currentTest.answers);
+					console.log('ответы:', currentTest.sequence
+						.map(function (answ, i) { return { truth: answ.truth, number: i+1 }; })
+						.filter(function (answ) { return answ.truth })
+						.map(function (answ) { return answ.number })
+					);
+				}
+
 				window.TestPageView.create(currentTest, function () {
 					deferred.resolve();
 				});
@@ -80,7 +104,6 @@ $(function () {
 
 		prev.then(function () {
 			window.ResultPageView.create(test);
-			console.log(test);
 		});
 	});
 
