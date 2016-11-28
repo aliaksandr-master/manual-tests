@@ -22,4 +22,5 @@ Thumbs.db
 .idea/
 .tmp/
 
+*_scsslint_*
 node_modules/
