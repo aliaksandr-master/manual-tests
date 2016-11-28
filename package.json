@@ -1,6 +1,9 @@
 {
   "name": "mary-tests",
   "version": "1.0.0",
+  "scripts": {
+    "build": "node_modules/.bin/grunt default"
+  },
   "dependencies": {
 
   },

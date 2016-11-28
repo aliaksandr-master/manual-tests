@@ -7,10 +7,12 @@ module.exports = grunto(function (grunt) {
   grunt.registerTask('default', [
     'clean:dist',
     'copy:dist',
-    'less',
-    'uglify',
-    'copy'
+    'less:dist',
+    'uglify:dist'
   ]);
+
+  var SRC_DIR = 'app';
+  var BUILD_DIR = '.tmp/release';
 
   return {
     clean: {
@@ -18,20 +20,22 @@ module.exports = grunto(function (grunt) {
         files: [
           {
             dot: true,
-            src: '.tmp'
+            src: BUILD_DIR
           }
         ]
-      },
-      server: '.tmp'
+      }
     },
     copy: {
       dist: {
         files: [
           {
             expand: true,
-            cwd: 'app',
-            dest: '.tmp/release',
-            src: '**/*'
+            cwd: SRC_DIR,
+            dest: BUILD_DIR,
+            src: [
+              '**/*',
+              '!**/*.less'
+            ]
           }
         ]
       }
@@ -40,14 +44,17 @@ module.exports = grunto(function (grunt) {
       dist: {
         files: [
           {
-            src: 'app/styles/main.less',
-            dest: '.tmp/release/styles/main.css'
+            expand: true,
+            cwd: SRC_DIR,
+            src: 'styles/main.less',
+            dest: BUILD_DIR,
+            ext: '.css'
           }
         ],
         options: {
           compress: true,
           sourceMap: false,
-          sourceMapBasepath: 'app/',
+          sourceMapBasepath: SRC_DIR + '/',
           sourceMapRootpath: '/'
         }
       }
@@ -57,9 +64,10 @@ module.exports = grunto(function (grunt) {
         files: [
           {
             expand: true,
-            cwd: '.tmp/release',
-            src: 'app/**/*.js',
-            dest: '.tmp/release'
+            replace: true,
+            cwd: BUILD_DIR,
+            src: [ '**/*.js' ],
+            dest: BUILD_DIR
           }
         ]
       }
