@@ -18,21 +18,32 @@ module.exports = grunto(function (grunt) {
         files: [
           {
             dot: true,
-            src: [
-              '.tmp',
-              'dist/*',
-              '!dist/.git*'
-            ]
+            src: '.tmp'
           }
         ]
       },
       server: '.tmp'
     },
+    copy: {
+      dist: {
+        files: [
+          {
+            expand: true,
+            cwd: 'app',
+            dest: '.tmp/release',
+            src: '**/*'
+          }
+        ]
+      }
+    },
     less: {
       dist: {
-        files: {
-          'app/styles/main.css': [ 'dist/styles/main.less' ]
-        },
+        files: [
+          {
+            src: 'app/styles/main.less',
+            dest: '.tmp/release/styles/main.css'
+          }
+        ],
         options: {
           compress: true,
           sourceMap: false,
@@ -46,24 +57,9 @@ module.exports = grunto(function (grunt) {
         files: [
           {
             expand: true,
-            cwd: 'dist',
+            cwd: '.tmp/release',
             src: 'app/**/*.js',
-            dest: 'dist'
-          }
-        ]
-      }
-    },
-    copy: {
-      dist: {
-        files: [
-          {
-            expand: true,
-            dot: true,
-            cwd: 'app',
-            dest: 'dist',
-            src: [
-              '{fonts,scripts,vendor}/**/*'
-            ]
+            dest: '.tmp/release'
           }
         ]
       }

@@ -20,6 +20,6 @@ Thumbs.db
 .svn
 .CVS
 .idea/
+.tmp/
 
 node_modules/
-dist/
