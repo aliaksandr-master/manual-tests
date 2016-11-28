@@ -19,9 +19,7 @@ Thumbs.db
 .hg
 .svn
 .CVS
-.idea
+.idea/
 
-node_modules
-dist
-.tmp
-app/bower_components
+node_modules/
+dist/
