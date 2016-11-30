@@ -2,11 +2,12 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const postCssAutoprefixer = require('autoprefixer');
 const postCssSlectorNot = require('postcss-selector-not');
 const postCssFlexBugsFixes = require('postcss-flexbugs-fixes');
-const environments = require('./sys/env.json');
 const options = require('./sys/config');
+const postCssMqPacker = require('css-mqpacker');
 
 
 
@@ -26,7 +27,7 @@ config.output = {
 
 
 config.entry = {
-  'index': [
+  'app': [
     `${options.DIR_CWD}/${options.DIR_SRC}/index`
   ]
 };
@@ -35,7 +36,6 @@ config.entry = {
 
 
 config.externals = { // See http://webpack.github.io/docs/library-and-externals.html
-  jquery: 'jQuery'
 };
 
 
@@ -50,17 +50,15 @@ config.module = {
     {
       test: /\.(?:js)(?:\?.*)?$/i,
       exclude: [
-        /\/node_modules\//,
-        /\/vendor\/[^/]+\/lib\//
+        /\/node_modules(?!\/tiny-component)\//
       ],
       loaders: [
         `babel?${[
           'presets[]=es2015',
-          'presets[]=stage-2',
+          'presets[]=stage-3',
           'plugins[]=transform-runtime',
           `cacheDirectory=${options.DIR_BABEL_CACHE_DIR}`
-        ].join('&')}`,
-        'sm-pragma-loader'
+        ].join('&')}`
       ]
     },
     {
@@ -69,7 +67,7 @@ config.module = {
     },
     {
       test: /\.(?:less)(?:\?.*)?$/i,
-      loader: 'css!postcss!less'
+      loader: ExtractTextPlugin.extract('style', 'css!postcss!less', { publicPath: '' })
     },
     {
       test: /\.(?:eot|ttf|woff|woff2)(?:\?[a-z0-9]*)?$/i,
@@ -102,7 +100,6 @@ config.module = {
 
 config.resolveLoader = {
   alias: {
-    'sm-pragma-loader': path.join(__dirname, 'sys/webpack-loaders/sm-pragma-loader/sm-pragma-loader.js')
   }
 };
 
@@ -111,19 +108,19 @@ config.resolveLoader = {
 
 config.plugins = [
   new webpack.DefinePlugin({
-    __SENTRY_DSN_DEV__: options.__SENTRY_DSN_DEV__,
-    __SENTRY_DSN_PROD__: options.__SENTRY_DSN_PROD__,
     __APP_VERSION__: options.__APP_VERSION__,
-    __APP_STAMP__: options.__APP_STAMP__,
-    __APP_DATE__: options.__APP_DATE__,
     __LOCAL_MODE__: options.__LOCAL_MODE__,
-    __DEV_MODE__: options.__DEV_MODE__,
     __PROD_MODE__: options.__PROD_MODE__
   }),
 
   new webpack.optimize.DedupePlugin(),
 
   new webpack.optimize.OccurenceOrderPlugin(true),
+
+  new ExtractTextPlugin('[name].css', {
+    disable: true,
+    allChunks: true
+  }),
 
   new webpack.ProgressPlugin((percentage, msg) => {
     console.log(`[webpack compiling] ${(percentage * 100).toFixed(0)}% ${msg}`); // eslint-disable-line no-console
@@ -168,28 +165,8 @@ config.postcss = () => [
 
 
 config.bail = true;
-
-
-
-
 config.devtool = null;
-
-
-
-
 config.cache = false;
-
-
-
-
 config.debug = false;
-
-
-
-
 config.watch = false;
-
-
-
-
 module.exports = config;
