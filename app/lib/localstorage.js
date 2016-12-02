@@ -7,7 +7,7 @@ export const setObject = (name, data) => {
 export const getObject = (name, defaultData = null) => {
   const data = localStorage.getItem(name);
 
-  if (data) {
+  if (data != null) {
     try {
       return JSON.parse(data);
     } catch (e) {
