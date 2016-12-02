@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "babel-plugin-transform-runtime": "^6.15.0",
+    "express": "^4.14.0",
     "hless": "^2.0.0",
     "tiny-component": "^1.1.1"
   },
