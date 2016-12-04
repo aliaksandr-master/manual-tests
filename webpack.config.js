@@ -72,21 +72,21 @@ config.module = {
     {
       test: /\.(?:eot|ttf|woff|woff2)(?:\?[a-z0-9]*)?$/i,
       loaders: [
-        'file?name=[name]-[sha1:hash:7].[ext]'
+        'url?limit=500000&name=[name]-[sha1:hash:7].[ext]'
       ]
     },
     {
       test: /\.(?:png|jpg|gif)(?:\?.*)?$/i,
       loaders: [
-        // 'url?limit=5000&name=[name]-[sha1:hash:7].[ext]'
-        'file?name=[name]-[sha1:hash:7].[ext]'
+        'url?limit=500000&name=[name]-[sha1:hash:7].[ext]'
+        // 'file?name=[name]-[sha1:hash:7].[ext]'
       ]
     },
     {
       test: /\.(?:svg)(?:\?.*)?$/i,
       loaders: [
-        // 'url?limit=5000&name=[name]-[sha1:hash:7].[ext]',
-        'file?name=[name]-[sha1:hash:7].[ext]'
+        'url?limit=500000&name=[name]-[sha1:hash:7].[ext]'
+        // 'file?name=[name]-[sha1:hash:7].[ext]'
         // 'svg-url?noquotes',
         // `svgo-loader?${JSON.stringify({ plugins: [ { removeTitle: true }, { convertColors: { shorthex: false } }, { convertPathData: false } ] })}`
         //'url?limit=7000&name=[name]-[sha1:hash:7].[ext]',
