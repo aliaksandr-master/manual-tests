@@ -30,7 +30,7 @@ const devServerConfig = {
 };
 
 webpackConfig.bail = false;
-webpackConfig.devtool = 'inline-source-map';
+webpackConfig.devtool = 'source-map';
 webpackConfig.cache = true;
 webpackConfig.debug = true;
 webpackConfig.watch = true;

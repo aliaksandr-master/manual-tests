@@ -10,7 +10,7 @@
     "babel-plugin-transform-runtime": "^6.15.0",
     "express": "^4.14.0",
     "hless": "^2.0.0",
-    "tiny-component": "^1.1.1"
+    "tiny-component": "^1.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.3",
@@ -20,7 +20,7 @@
     "babel-preset-stage-3": "^6.17.0",
     "chalk": "^1.1.3",
     "crypto-js": "^3.1.8",
-    "css-loader": "^0.26.0",
+    "css-loader": "^0.26.1",
     "css-mqpacker": "^5.0.1",
     "exports-loader": "^0.6.3",
     "expose-loader": "^0.7.1",
@@ -49,7 +49,7 @@
     "nw-builder": "^3.1.2",
     "open": "0.0.5",
     "postcss-flexbugs-fixes": "^2.0.0",
-    "postcss-loader": "^1.1.1",
+    "postcss-loader": "^1.2.0",
     "postcss-selector-not": "^2.0.0",
     "raw-loader": "^0.5.1",
     "script-loader": "^0.7.0",

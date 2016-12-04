@@ -1,1 +1,76 @@
 @import '../../lib/mixins.less';
+
+
+.b-page-test-result {
+
+}
+
+.b-page-test-result__fail-h1 {
+  font-size: 2em;
+  text-align: left;
+  color: #444;
+  margin-bottom: 10px;
+}
+.b-page-test-result__fail-h2 {
+  font-size: 1.5em;
+  text-align: left;
+  color: #444;
+  margin-bottom: 10px;
+}
+.b-page-test-result__fail-h2-results {
+  color: darkgreen;
+}
+.b-page-test-result__fail-h2-results.-error {
+  color: red;
+}
+.b-page-test-result__fail-h3 {
+  font-size: 1em;
+  text-align: left;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.b-page-test-result__errors-wr {
+  text-align: center;
+}
+
+.b-page-test-result__errors {
+  text-align: left;
+  display: inline-block;
+}
+
+.b-page-test-result__fail-error-h {
+  font-size: 1.3em;
+}
+
+.b-page-test-result__error {
+  ._clearfix();
+}
+
+.b-page-test-result__error-number {
+  float: left;
+  padding: 4px;
+
+  &:after {
+    content: '.';
+  }
+}
+
+.b-page-test-result__error-text {
+  overflow: hidden;
+  padding: 4px;
+}
+
+.b-page-test-result__success-h1 {
+  font-size: 2em;
+  text-align: center;
+  color: green;
+}
+
+.b-page-test-result__reload-btn-wr {
+
+}
+
+.b-page-test-result__reload-btn {
+
+}

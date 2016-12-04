@@ -6,117 +6,12 @@
   <title>Тестирование</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="vendor/katex.min.css">
   <script type="text/javascript">
     window.QUESTIONS = [];
   </script>
 </head>
 <body>
-  <div class="container">
-    <div id="page-container" class="jumbotron"></div>
-  </div>
-  <br/>
-  <br/>
-  <!--<script id="tpl-main" type="text/x-ejs-template">
-    <div class="b-main">
-      <div>
-        <div class="text-center">
-          <div class="clearfix" style="max-width: 350px; margin: 0 auto;">
-            <h2>Тестирование</h2>
-            <p><%= Math.floor(allQuestions.length / variants) %> вопросов по <%= tags.length %> темам</p>
-            <p class="b-main-info">Всего вопросов в системе: <%= allQuestions.length %></p>
-            <div class="input-group" style="display: none;">
-              <div class="input-group-addon text-right" style="width: 270px">
-                Номер варианта
-              </div>
-              <select id="test-variant" class="form-control text-center">
-                <% for (var i = 0; i < variants; i++) { %>
-                  <option value="<%= i %>"><%= i + 1 %></option>
-                <% } %>
-              </select>
-            </div>
-            <div class="input-group" style="display: none;">
-              <div class="input-group-addon text-right" style="width: 270px">
-                Количество вопросов
-              </div>
-              <input id="test-question-count" value="<%= Math.floor(allQuestions.length / variants) %>" type="text" class="form-control text-center"/>
-            </div>
-            <div class="input-group" style="display: none;">
-              <div class="input-group-addon text-right" style="width: 270px">
-                Допустимое количество ошибок
-              </div>
-              <input id="test-errors" value="1" type="text" class="form-control text-center"/>
-            </div>
-          </div>
-        </div>
-        <div class="text-center" style="margin-top: 20px">
-          <button id="start" class="btn btn-success btn-lg">Приступить к тестированию</button>
-        </div>
-      </div>
-    </div>
-  </script>
-  <script id="tpl-test" type="text/x-ejs-template">
-    <% var randDate = Date.now() %>
-    <form class="b-test" onsubmit="return!1;">
-      <div class="b-test__question"><%= question %></div>
-      <div class="b-test__answers">
-        <% var _index = 1 %>
-        <% _.each(sequence, function (answer) {%>
-          <div class="b-test__answer">
-            <div class="b-test__answer-number"><%= _index++ %></div>
-            <div class="b-test__answer-toggle-wr">
-              <input class="b-test__answer-toggle" name="answer-<%= answer.number %>" value="<%= answer.number %>" type="checkbox" id="chk-<%= randDate %>-<%= answer.number %>"/>
-              <label class="b-test__answer-toggle-label" for="chk-<%= randDate %>-<%= answer.number %>"><%= answer.text %></label>
-            </div>
-          </div>
-        <%}) %>
-      </div>
-      <div class="b-test__submit-wr clearfix">
-        <div class="b-test__counter">
-          <%= counter %>/<%= total %>
-        </div>
-        <button class="b-test__submit btn-success btn btn-lg" id="test-submit" type="submit">Ответить</button>
-      </div>
-    </form>
-  </script>
-  <script id="tpl-result" type="text/x-ejs-template">
-    <div class="b-result">
-      <div class="b-result__fail-h1">Результаты теста:</div>
-      <div class="b-result__fail-h2">Количество правильных ответов: <span class="b-result__fail-h2-results <% if (errors.length) { %>-error<% } %>"><%= questions.length - errors.length %> / <%= questions.length %></span></div>
-      <% if (errors.length) {%>
-        <div class="b-result__fail-h3">Перечень вопросов на которые Вы ответили неправильно:</div>
-        <div class="b-result__errors-wr">
-          <div class="b-result__errors">
-            <% _.each(errors, function (number) { %>
-              <div class="b-result__error">
-                <div class="b-result__error-number"><%= Number(number)+1 %></div>
-                <div class="b-result__error-text"><%= questions[number].question %></div>
-              </div>
-            <% }) %>
-          </div>
-        </div>
-      <% } %>
-      <br/>
-      <div class="b-result__reload-btn-wr text-center">
-        <button type="button" class="b-result__reload-btn btn btn-lg btn-success" onclick="window.location.reload()">Попробовать еще раз</button>
-      </div>
-    </div>
-  </script>
-  <script type="application/javascript" src="./vendor/jquery.js"></script>
-  <script type="application/javascript" src="./vendor/lodash.js"></script>
-  <script type="application/javascript" src="./scripts/lib/questions.js"></script>
-  <script type="application/javascript" src="./scripts/data/1.js"></script>
-  <script type="application/javascript" src="./scripts/data/2.js"></script>
-  <script type="application/javascript" src="./scripts/lib/Class.js"></script>
-  <script type="application/javascript" src="./scripts/lib/template.js"></script>
-  <script type="application/javascript" src="./scripts/lib/View.js"></script>
-  <script type="application/javascript" src="./scripts/app/PageView.js"></script>
-  <script type="application/javascript" src="./scripts/app/FirstPageView.js"></script>
-  <script type="application/javascript" src="./scripts/app/TestPageView.js"></script>
-  <script type="application/javascript" src="./scripts/app/ResultPageView.js"></script>
-  <script type="application/javascript" src="./scripts/main.js"></script>-->
-
   <script src="/app.js"></script>
 </body>
 </html>

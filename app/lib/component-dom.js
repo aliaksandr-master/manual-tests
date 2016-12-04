@@ -24,6 +24,10 @@ export default (el, events) => {
       return result;
     },
     on (selector, event, handler) {
+      if (!selector) {
+        selector = el;
+      }
+
       if (typeof selector === 'string') {
         selector = el.querySelectorAll(selector);
       }
