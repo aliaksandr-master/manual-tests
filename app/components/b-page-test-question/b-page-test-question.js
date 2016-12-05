@@ -75,6 +75,10 @@ export default Component(({ params: { question }, store: { maxQuestions, test: {
       .sort()
       .map(Number);
 
+    if (!data.length) {
+      return;
+    }
+
     answers.push(data);
 
     if (data.join(',') !== correctData.join(',')) {

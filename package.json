@@ -6,6 +6,19 @@
     "dev-release": "NODE_ENV=development grunt default",
     "prod-release": "NODE_ENV=production grunt default"
   },
+  "main": "app/index.html",
+  "window": {
+    "title": "Tests",
+    "toolbar": false,
+    "frame": true,
+    "resizable": false,
+    "width": 800,
+    "height": 800,
+    "position": "center"
+  },
+  "webkit": {
+    "plugin": false
+  },
   "dependencies": {
     "babel-plugin-transform-runtime": "^6.15.0",
     "express": "^4.14.0",

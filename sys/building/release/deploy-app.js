@@ -4,10 +4,10 @@ const path = require('path');
 const fse = require('fs-extra');
 const options = require('../../config');
 
-module.exports = (done) => {
-  fse.ensureDirSync(options.DIR_DEPLOY);
-  fse.ensureDirSync(options.DIR_NW_CACHE);
+fse.ensureDirSync(options.DIR_DEPLOY);
+fse.ensureDirSync(options.DIR_NW_CACHE);
 
+module.exports = (done) => {
   const nw = new NwBuilder({
     buildDir: options.DIR_DEPLOY,
     flavor: options.ENV === 'production' ? 'normal' : 'sdk',
