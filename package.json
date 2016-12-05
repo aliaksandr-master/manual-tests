@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "./node_modules/.bin/gulp dev",
-    "dev-release": "NODE_ENV=development grunt default",
-    "prod-release": "NODE_ENV=production grunt default"
+    "dev-release": "NODE_ENV=development gulp release",
+    "prod-release": "NODE_ENV=production gulp release"
   },
   "main": "app/index.html",
   "window": {
@@ -13,7 +13,7 @@
     "frame": true,
     "resizable": false,
     "width": 800,
-    "height": 800,
+    "height": 700,
     "position": "center"
   },
   "webkit": {
@@ -23,6 +23,7 @@
     "babel-plugin-transform-runtime": "^6.15.0",
     "express": "^4.14.0",
     "hless": "^2.0.0",
+    "jsencrypt": "^2.3.1",
     "tiny-component": "^1.3.1"
   },
   "devDependencies": {

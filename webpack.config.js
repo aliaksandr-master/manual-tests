@@ -18,7 +18,7 @@ const config = {};
 
 
 config.output = {
-  path: `${options.DIR_CWD}/${options.DIR_RELEASED}`,
+  path: `${options.DIR_CWD}/${options.DIR_SRC}`,
   pathinfo: true,
   filename: '[name].js'
 };
@@ -64,6 +64,10 @@ config.module = {
     {
       test: /\.(?:json)(?:\?.*)?$/i,
       loader: 'json'
+    },
+    {
+      test: /\.(?:pem)(?:\?.*)?$/i,
+      loader: 'raw'
     },
     {
       test: /\.(?:less)(?:\?.*)?$/i,

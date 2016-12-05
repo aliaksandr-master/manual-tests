@@ -9,6 +9,29 @@
   <link rel="stylesheet" href="vendor/katex.min.css">
 </head>
 <body>
-  <script src="/app.js"></script>
+  <script>
+    (() => {
+      if (typeof require === 'undefined') {
+          return;
+      }
+      const gui = require('nw.gui');
+      const win = gui.Window.get();
+
+      const path = require('path');
+      const CWD = path.dirname(process.execPath);
+      const fs = require('fs');
+
+      window.getJSON = (url) =>
+        Promise.resolve()
+          .then(() => {
+            return JSON.parse(fs.readFileSync(path.join(CWD, url), 'utf8'));
+          });
+
+      win.on('close', () => {
+        win.close(true);
+      });
+    })();
+  </script>
+  <script src="app.js"></script>
 </body>
 </html>

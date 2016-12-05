@@ -21,6 +21,7 @@ Thumbs.db
 .CVS
 .idea/
 .tmp/
+app/app.js
 
 *_scsslint_*
 node_modules/

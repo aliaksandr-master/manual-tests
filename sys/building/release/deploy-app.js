@@ -3,6 +3,7 @@
 const path = require('path');
 const fse = require('fs-extra');
 const options = require('../../config');
+const NwBuilder = require('nw-builder');
 
 fse.ensureDirSync(options.DIR_DEPLOY);
 fse.ensureDirSync(options.DIR_NW_CACHE);
@@ -14,9 +15,10 @@ module.exports = (done) => {
     buildType: 'timestamped',
     cacheDir: options.DIR_NW_CACHE,
     files: [
-      `${options.DIR_RELEASED}/**/*`
+      `${options.DIR_CWD}/package.json`,
+      `${options.DIR_CWD}/${options.DIR_SRC}/**/*`,
     ],
-    platforms: [ 'win32'/*, 'win64'*/ ]
+    platforms: [ 'win32', 'win64', 'linux64' ]
   });
 
   nw.on('log',  console.log);

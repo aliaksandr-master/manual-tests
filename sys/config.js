@@ -16,4 +16,3 @@ exports.DIR_BABEL_CACHE_DIR = `${exports.DIR_CWD}/.tmp/babel`;
 exports.DIR_SRC = 'app';
 exports.DIR_SYS = 'sys';
 exports.DIR_DEPLOY = `${exports.DIR_CWD}/.tmp/release-${exports.ENV}`;
-exports.DIR_RELEASED = '.tmp/build';
