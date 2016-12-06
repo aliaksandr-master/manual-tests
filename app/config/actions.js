@@ -10,7 +10,7 @@ export const PAGE_TEST_START = symbol('PAGE_TEST_START');
 export const PAGE_TEST_QUESTION = symbol('PAGE_TEST_QUESTION');
 export const PAGE_TEST_RESULT = symbol('PAGE_TEST_RESULT');
 
-export const changePage = (pageId, params) => ({ pageId, params });
+export const changePage = (pageId, params = {}) => ({ pageId, params });
 
 export const EVENT_AUTH = symbol('EVENT_AUTH');
 
