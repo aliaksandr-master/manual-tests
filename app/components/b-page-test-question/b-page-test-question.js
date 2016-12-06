@@ -9,6 +9,8 @@ import shuffle from 'lodash/shuffle';
 import { PAGE_TEST_QUESTION, PAGE_TEST_RESULT, EVENT_CHANGE_PAGE_CONTENT, changePage } from '../../config/actions';
 
 
+const CLASS_SUBMIT_DISABLED = 'b-page-test-question__submit--disabled';
+
 export default Component(({ params: { question }, store: { maxQuestions, test: { questions } } }, $cmp) => {
   const currentQuestion = questions[question];
 
@@ -38,14 +40,26 @@ export default Component(({ params: { question }, store: { maxQuestions, test: {
         <div class="b-page-test-question__counter">
           ${question + 1}/${maxQuestions}
         </div>
-        <button class="b-page-test-question__submit btn-success btn btn-lg" id="b-page-test-question__submit" type="submit">Ответить</button>
+        <button class="b-page-test-question__submit ${CLASS_SUBMIT_DISABLED} btn-success btn btn-lg" id="b-page-test-question__submit" type="submit">Ответить</button>
       </div>
     </form>
-    `;
+  `;
 },
 ({ params: { question }, store: { maxQuestions, test: { answers, questions, errors } } }, { el, events }) => {
   const { on, serialize } = dom(el, events);
   const currentQuestion = questions[question];
+
+  const submit = el.querySelector('#b-page-test-question__submit');
+
+  const change = () => {
+    const data = values(serialize('.b-page-test-question__answer-toggle:checked')).sort().map(Number);
+
+    if (data.length) {
+      submit.classList.remove(CLASS_SUBMIT_DISABLED);
+    } else {
+      submit.classList.add(CLASS_SUBMIT_DISABLED);
+    }
+  };
 
   on(document, 'keypress', ({ which }) => {
     const start = 48;
@@ -56,6 +70,8 @@ export default Component(({ params: { question }, store: { maxQuestions, test: {
       iterate(el.querySelector(`#b-test__answer-toggle--${number}`), (element) => {
         element.checked = !element.checked;
       });
+
+      change();
     }
   });
 
@@ -63,7 +79,9 @@ export default Component(({ params: { question }, store: { maxQuestions, test: {
     element.focus();
   });
 
-  on('#b-page-test-question__submit', 'click', () => {
+  on('.b-page-test-question__answer-toggle', 'change', change);
+
+  on(submit, 'click', () => {
     const nextQuestion = question + 1;
 
     const data = values(serialize('.b-page-test-question__answer-toggle:checked')).sort().map(Number);
