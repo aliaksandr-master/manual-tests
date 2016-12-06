@@ -64,7 +64,7 @@ resolve({
 .then(({ questions, auth, test, questionsByTag, questionsByVariants }) => {
   const data = {
     store: {
-      maxTime: 1 * 10 * 1000, // 30min
+      maxTime: 30 * 60 * 1000, // 30min
       maxQuestions: MAX_QUESTIONS_IN_TEST,
       auth,
       test,
