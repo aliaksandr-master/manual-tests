@@ -11,8 +11,8 @@ import { PAGE_TEST_QUESTION, PAGE_TEST_RESULT, EVENT_CHANGE_PAGE_CONTENT, change
 
 const CLASS_SUBMIT_DISABLED = 'b-page-test-question__submit--disabled';
 
-export default Component(({ params: { question }, store: { maxQuestions, test: { questions } } }, $cmp) => {
-  const currentQuestion = questions[question];
+export default Component(({ params: { test: { questionIndex, questionsIds } }, db: { questionsById } }) => {
+  const currentQuestion = questionsById[questionsIds[questionIndex]];
 
   const answers = shuffle(values(currentQuestion.answers));
 
@@ -38,21 +38,21 @@ export default Component(({ params: { question }, store: { maxQuestions, test: {
       </div>
       <div class="b-page-test-question__submit-wr clearfix">
         <div class="b-page-test-question__counter">
-          ${question + 1}/${maxQuestions}
+          ${questionIndex + 1}/${questionsIds.length}
         </div>
         <button class="b-page-test-question__submit ${CLASS_SUBMIT_DISABLED} btn-success btn btn-lg" id="b-page-test-question__submit" type="submit">Ответить</button>
       </div>
     </form>
   `;
 },
-({ params: { question }, store: { maxQuestions, test: { answers, questions, errors } } }, { el, events }) => {
+({ params: { test: { answers, questionsIds, questionIndex } }, db: { maxQuestions, questionsById } }, { el, events }) => {
   const { on, serialize } = dom(el, events);
-  const currentQuestion = questions[question];
+  const currentQuestion = questionsById[questionsIds[questionIndex]];
 
   const submit = el.querySelector('#b-page-test-question__submit');
 
   const change = () => {
-    const data = values(serialize('.b-page-test-question__answer-toggle:checked')).sort().map(Number);
+    const data = values(serialize('.b-page-test-question__answer-toggle:checked'));
 
     if (data.length) {
       submit.classList.remove(CLASS_SUBMIT_DISABLED);
@@ -82,16 +82,9 @@ export default Component(({ params: { question }, store: { maxQuestions, test: {
   on('.b-page-test-question__answer-toggle', 'change', change);
 
   on(submit, 'click', () => {
-    const nextQuestion = question + 1;
+    const nextQuestion = questionIndex + 1;
 
-    const data = values(serialize('.b-page-test-question__answer-toggle:checked')).sort().map(Number);
-
-    const correctData = values(currentQuestion.answers)
-      .filter((answ) => answ.truth)
-      .map((answ) => answ.number)
-      .map(String)
-      .sort()
-      .map(Number);
+    const data = values(serialize('.b-page-test-question__answer-toggle:checked'));
 
     if (!data.length) {
       return;
@@ -99,15 +92,11 @@ export default Component(({ params: { question }, store: { maxQuestions, test: {
 
     answers.push(data);
 
-    if (data.join(',') !== correctData.join(',')) {
-      errors.push(question);
-    }
-
     if (nextQuestion === maxQuestions) {
       events.$emit(EVENT_CHANGE_PAGE_CONTENT, changePage(PAGE_TEST_RESULT));
       return;
     }
 
-    events.$emit(EVENT_CHANGE_PAGE_CONTENT, changePage(PAGE_TEST_QUESTION, { question: nextQuestion }));
+    events.$emit(EVENT_CHANGE_PAGE_CONTENT, changePage(PAGE_TEST_QUESTION, nextQuestion));
   });
 });

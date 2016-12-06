@@ -22,6 +22,8 @@ import {
 } from '../../config/actions'
 
 import once from 'lodash/once';
+import shuffle from 'lodash/shuffle';
+import randomArray from '../../lib/random-array';
 
 
 const timeIterator = (delay, iterator) => {
@@ -90,32 +92,68 @@ export default Component(({}, $cmp) =>
     <div class="b-app__timer"></div>  
   </div>
 </div>`,
-({ store }, { el, events, child }) => {
+(db, { el, events, child }) => {
+  const { questionsByTag, questions, maxQuestions } = db;
   const cleanups = [];
   const content = document.getElementById('b-app__content');
 
-  let contentComponent = applyContentComponent(child, content, PAGE_TEST_START, { store });
+  let contentComponent = applyContentComponent(child, content, PAGE_TEST_START, { db, params: {} });
+
+  let test = {
+    questionIndex: 0,
+    questionsIds: [],
+    answers: []
+  };
 
   events.on(EVENT_CHANGE_PAGE_CONTENT, ({ pageId, params }) => {
-    contentComponent.destroy();
-    contentComponent = applyContentComponent(child, content, pageId, { store, params });
+    if (pageId === PAGE_TEST_QUESTION) {
+      const testIndex = Number(params);
 
-    if (pageId === PAGE_TEST_QUESTION && params.question === 0) {
-      events.emit(START_TEST);
+      if (testIndex === 0) {
+        test.answers = [];
+        test.questionIndex = 0;
+        test.questionsIds = Object.keys(questionsByTag)
+          .map((tag) => ({ tag, weight: questionsByTag[tag].length }))
+          .sort((w1, w2) => {
+            if (w1.weight > w2.weight) {
+              return 1;
+            }
+
+            if (w1.weight < w2.weight) {
+              return -1;
+            }
+
+            return 0;
+          })
+          .reduce((questionsIds, { tag, weight }) => {
+            const qCount = Math.ceil((weight / questions.length) * maxQuestions);
+
+            return randomArray(questionsIds.concat(randomArray(questionsByTag[tag], qCount).map((q) => q.id)), maxQuestions);
+          }, []);
+
+        events.emit(START_TEST);
+      }
+
+      test.questionIndex = testIndex;
+
+      params = { test };
     }
 
     if (pageId === PAGE_TEST_RESULT) {
       events.emit(FINISH_TEST);
+
+      params = { test };
     }
 
-    console.log(store);
+    contentComponent.destroy();
+    contentComponent = applyContentComponent(child, content, pageId, { db, params });
   });
 
   events.on(EVENT_AUTH, (auth) => {
-    store.auth = auth;
+    db.auth = auth;
   });
 
-  const max = store.maxTime;
+  const max = db.maxTime;
   let timer = el.querySelector('.b-app__timer');
 
   let stopTimer = () => {};

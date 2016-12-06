@@ -6,7 +6,7 @@ import dom from '../../lib/component-dom';
 import iterate from '../../lib/dom/iterate';
 import { PAGE_TEST_QUESTION, EVENT_CHANGE_PAGE_CONTENT, changePage } from '../../config/actions';
 
-export default Component(({ store: { questions, maxQuestions, tags }}, $cmp) =>
+export default Component(({ db: { questions, maxQuestions, tags } }) =>
 `
 <div class="b-page-test-start">
   <div>
@@ -31,6 +31,6 @@ export default Component(({ store: { questions, maxQuestions, tags }}, $cmp) =>
   });
 
   on('#b-page-test-start__start', 'click', () => {
-    events.$emit(EVENT_CHANGE_PAGE_CONTENT, changePage(PAGE_TEST_QUESTION, { question: 0 }));
+    events.$emit(EVENT_CHANGE_PAGE_CONTENT, changePage(PAGE_TEST_QUESTION, 0));
   });
 });
