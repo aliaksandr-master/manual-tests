@@ -55,7 +55,25 @@ module.exports = (callback) => {
   app.use(WebpackDevMiddleware(compiler, devServerConfig));
   app.use(WebpackHotMiddleware(compiler));
 
-  app.get('*', express.static(`${options.DIR_CWD}/${options.DIR_SRC}`));
+  const router = express.Router();
+
+  router.get('*', (req, res, next) => {
+    if (req.get('X-Dir-Files') === 'glob') {
+      const rPath = path.join(options.DIR_CWD, options.DIR_SRC);
+
+      res.send(
+        glob
+          .sync(path.join(rPath, req.url))
+          .map((filename) => filename.replace(rPath, ''))
+      );
+      return;
+    }
+    next();
+  });
+
+  router.get('*', express.static(`${options.DIR_CWD}/${options.DIR_SRC}`));
+
+  app.use(router);
 
   app.listen(devServerConfig.port, (err) => {
     if (err) {

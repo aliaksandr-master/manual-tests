@@ -8,17 +8,13 @@ export default Component(({ params: { test: { answers, questionsIds } }, db: { q
   const errors = questionsIds.reduce((errors, quetionId, index) => {
     const question = questionsById[quetionId];
 
-    const correctAnswer = values(question.answers)
-      .filter((ans) => ans.truth)
-      .map((ans) => ans.number)
-      .sort()
-      .map(String);
-
     if (!answers[index]) {
       errors.push({ index, question, isAnswered: false });
 
       return errors;
     }
+
+    const correctAnswer = question.answers.sort().map(String);
 
     const currentAnswer = answers[index].sort().map(String);
 

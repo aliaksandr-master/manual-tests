@@ -14,24 +14,25 @@ const CLASS_SUBMIT_DISABLED = 'b-page-test-question__submit--disabled';
 export default Component(({ params: { test: { questionIndex, questionsIds } }, db: { questionsById } }) => {
   const currentQuestion = questionsById[questionsIds[questionIndex]];
 
-  const answers = shuffle(values(currentQuestion.answers));
+  const keys = shuffle(Object.keys(currentQuestion.choices)).map(Number);
 
-  console.log('верные ответы:', answers
-    .map((answ, i) => ({ truth: answ.truth, number: i+1 }))
-    .filter((answ) => answ.truth)
-    .map((answ) => answ.number)
+  console.log(
+    keys
+      .map((key, index) => currentQuestion.answers.includes(key) ? index + 1 : null)
+      .filter(Boolean),
+    currentQuestion
   );
 
   return `
     <form class="b-page-test-question" onsubmit="return false;">
       <div class="b-page-test-question__question">${currentQuestion.question}</div>
       <div class="b-page-test-question__answers">
-        ${answers.map((answer, index) => `
+        ${keys.map((key, index) => `
           <div class="b-page-test-question__answer">
             <div class="b-page-test-question__answer-number">${index+1}</div>
             <div class="b-page-test-question__answer-toggle-wr">
-              <input class="b-page-test-question__answer-toggle" name="answer-${index}" value="${answer.number}" type="checkbox" id="b-test__answer-toggle--${index}"/>
-              <label class="b-page-test-question__answer-toggle-label" for="b-test__answer-toggle--${index}">${answer.text}</label>
+              <input class="b-page-test-question__answer-toggle" name="answer-${index}" value="${key}" type="checkbox" id="b-test__answer-toggle--${index}"/>
+              <label class="b-page-test-question__answer-toggle-label" for="b-test__answer-toggle--${index}">${currentQuestion.choices[key]}</label>
             </div>
           </div>
         `).join('')}
@@ -45,9 +46,8 @@ export default Component(({ params: { test: { questionIndex, questionsIds } }, d
     </form>
   `;
 },
-({ params: { test: { answers, questionsIds, questionIndex } }, db: { maxQuestions, questionsById } }, { el, events }) => {
+({ params: { test: { answers, questionIndex } }, db: { maxQuestions } }, { el, events }) => {
   const { on, serialize } = dom(el, events);
-  const currentQuestion = questionsById[questionsIds[questionIndex]];
 
   const submit = el.querySelector('#b-page-test-question__submit');
 

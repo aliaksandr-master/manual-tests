@@ -25,3 +25,4 @@ app/app.js
 
 *_scsslint_*
 node_modules/
+scripts/convert-old-qestions/
