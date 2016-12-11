@@ -4,8 +4,6 @@ import Component, { renderToDom } from 'tiny-component';
 import componentDestroy from '../../lib/component-destroy';
 import iterate from '../../lib/dom/iterate';
 import symbol from '../../lib/symbol';
-import bPageDefault from '../b-page-default/b-page-default';
-import bPageLogin from '../b-page-login/b-page-login';
 import bPageTestQuestion from '../b-page-test-question/b-page-test-question';
 import bPageTestResult from '../b-page-test-result/b-page-test-result';
 import bPageTestStart from '../b-page-test-start/b-page-test-start';
@@ -13,8 +11,6 @@ import './b-app.less';
 import {
   EVENT_CHANGE_PAGE_CONTENT,
   EVENT_AUTH,
-  PAGE_LOGIN,
-  PAGE_DEFAULT,
   PAGE_TEST_START,
   PAGE_TEST_QUESTION,
   PAGE_TEST_RESULT,
@@ -22,7 +18,6 @@ import {
 } from '../../config/actions'
 
 import once from 'lodash/once';
-import shuffle from 'lodash/shuffle';
 import randomArray from '../../lib/random-array';
 
 
@@ -54,11 +49,9 @@ const timeIterator = (delay, iterator) => {
 };
 
 const pagesRoutes = {
-  [PAGE_LOGIN]: () => bPageLogin,
   [PAGE_TEST_START]: () => bPageTestStart,
   [PAGE_TEST_QUESTION]: () => bPageTestQuestion,
-  [PAGE_TEST_RESULT]: () => bPageTestResult,
-  [PAGE_DEFAULT]: () => bPageDefault
+  [PAGE_TEST_RESULT]: () => bPageTestResult
 };
 
 const TIME_IS_OVER = symbol('TIME_IS_OVER');

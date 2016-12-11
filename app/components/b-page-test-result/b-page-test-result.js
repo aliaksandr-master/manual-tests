@@ -47,10 +47,11 @@ export default Component(({ params: { test: { answers, questionsIds } }, db: { q
           </div>
         </div>
       `}
-      <br/>
+      <!--<br/>
       <div class="b-page-test-result__reload-btn-wr text-center">
         <button type="button" class="b-page-test-result__reload-btn btn btn-lg btn-success" onclick="window.location.reload()">Попробовать еще раз</button>
-      </div>
+        <button type="button" class="b-page-test-result__reload-btn btn btn-lg btn-success" onclick="window.location.reload()">Попробовать еще раз</button>
+      </div>-->
     </div>
   `
 },
