@@ -11,37 +11,27 @@ const FNAME = path.basename(__filename, path.extname(__filename));
 const SRC_PATH = path.resolve(__dirname, FNAME, 'input');
 const DEST_PATH = path.resolve(__dirname, FNAME, 'output');
 
+let counter = Date.now();
+
 glob
   .sync(path.join(SRC_PATH, '*.json'))
   .map((file) => JSON.parse(fs.readFileSync(file, 'utf8')))
-  .map((questionsArray) =>
+  .forEach((questionsArray) =>
     questionsArray
-      .map((question) => ({
+      .map((question, index) => ({
+        id: sha1(String(++counter)).toString(),
         type: question.type || 'simple',
         tag: question.tags[0] || 'undefined',
         question: question.question,
         choices: Object.keys(question.answers).map((key) => question.answers[key].text),
         answers: question.truth.map((index) => index - 1)
       }))
-      .map((question) =>
-        Object.assign({}, question, {
-          id: sha1(JSON.stringify(question)).toString()
-        })
-      )
+      .forEach((question) => {
+        let content = new Buffer(JSON.stringify(question)).toString('base64');
+
+        fse.ensureDirSync(DEST_PATH);
+
+        fs.writeFileSync(path.join(DEST_PATH, `${question.id}.dat4`), content, 'utf8');
+      })
   )
-  .forEach((questionsArray) => {
-    questionsArray.forEach((question) => {
-      let content = new Buffer(JSON.stringify(question)).toString('base64');
-      const salt = String(question.id);
-      const place = Math.floor(content.length / 2);
-
-      const fExt = '.dat4';
-
-      fse.ensureDirSync(DEST_PATH);
-
-      content = content.slice(0, place) + salt + content.slice(place);
-
-      fs.writeFileSync(path.join(DEST_PATH, `${question.id}-${place.toString(36)}-${salt.length.toString(36)}${fExt}`), content, 'utf8');
-    })
-  })
 ;

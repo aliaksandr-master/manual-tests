@@ -35,8 +35,6 @@ export default Component(({ db: { questions, maxQuestions, tags } }) =>
   const salt = date.getDate()+date.getMonth()+1;
   const pass = `${salt}tiramisu${String(salt).length}`;
 
-  console.log(pass);
-
   on('#b-page-test-start__start', 'click', () => {
     const data = serialize('[name]');
 
