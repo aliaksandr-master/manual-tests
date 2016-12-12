@@ -11,25 +11,15 @@ import './index.less';
 
 const MAX_QUESTIONS_IN_TEST = 28;
 const MAX_TIME = 30 * 60 * 1000;
-const DEFAULT_TAG = '@default@';
 
 resolve({
   auth: () => getObject('auth', { first_name: '', last_name: '', group_number: 0 }),
-  questions: () => getFilesInDir('/data/*-*-*.dat4')
+  questions: () => getFilesInDir('/data/*.dat4')
     .then((questionFiles) => Promise.all(
       questionFiles.map((questionFile) =>
         getFileContent(questionFile)
           .then((response) => response.text())
           .then((content) => {
-            const fileBasename = questionFile.split('/').pop().replace('.dat4', '');
-
-            let [ result, id, saltPosition, saltLength ] = /^([^-]+)-([^-]+)-([^-]+)$/.exec(fileBasename);
-
-            saltPosition = parseInt(saltPosition, 36);
-            saltLength = parseInt(saltLength, 36);
-
-            content = content.slice(0, saltPosition) + content.slice(saltPosition + saltLength);
-
             content = new Buffer(content, 'base64').toString('utf8');
 
             try {

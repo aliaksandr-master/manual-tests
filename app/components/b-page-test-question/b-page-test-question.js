@@ -41,7 +41,7 @@ export default Component(({ params: { test: { questionIndex, questionsIds } }, d
         <div class="b-page-test-question__counter">
           ${questionIndex + 1}/${questionsIds.length}
         </div>
-        <button class="b-page-test-question__submit ${CLASS_SUBMIT_DISABLED} btn-success btn btn-lg" id="b-page-test-question__submit" type="submit">Ответить</button>
+        <button class="b-page-test-question__submit ${CLASS_SUBMIT_DISABLED} btn-primary btn btn-lg" id="b-page-test-question__submit" type="submit">Ответить</button>
       </div>
     </form>
   `;

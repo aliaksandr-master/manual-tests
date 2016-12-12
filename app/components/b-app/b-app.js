@@ -80,10 +80,9 @@ const applyContentComponent = (child, slotElement, routeId, data = {}) => {
 
 export default Component(({}, $cmp) =>
 `<div class="b-app">
+  <div class="b-app__timer text-right"></div>  
   <div class="b-app__content" id="b-app__content"></div>
-  <div class="b-app__footer">
-    <div class="b-app__timer"></div>  
-  </div>
+  <div class="b-app__progress"></div>
 </div>`,
 (db, { el, events, child }) => {
   const { questionsByTag, questions, maxQuestions } = db;
@@ -98,7 +97,11 @@ export default Component(({}, $cmp) =>
     answers: []
   };
 
+  const progress = el.querySelector('.b-app__progress');
+
   events.on(EVENT_CHANGE_PAGE_CONTENT, ({ pageId, params }) => {
+    progress.style.width = 0;
+
     if (pageId === PAGE_TEST_QUESTION) {
       const testIndex = Number(params);
 
@@ -128,6 +131,8 @@ export default Component(({}, $cmp) =>
       }
 
       test.questionIndex = testIndex;
+
+      progress.style.width = testIndex ? `${Math.floor((testIndex) * 1000 / maxQuestions) / 10}%` : 0;
 
       params = { test };
     }
