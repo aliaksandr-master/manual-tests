@@ -14,7 +14,8 @@ export const getFileContent = (url) => {
     return window.getFileContent(url);
   }
 
-  return window.fetch(url);
+  return window.fetch(url)
+    .then((response) => response.text());
 };
 
 export const getFilesInDir = (url) => {

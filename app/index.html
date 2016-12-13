@@ -22,19 +22,17 @@
       const fs = require('fs');
       const glob = require('glob');
 
-      window.getFilesInDir = (globTpl) => {
+      window.getFilesInDir = (globTpl) =>
         Promise.resolve()
           .then(() =>
             glob
               .sync(path.join(CWD, globTpl))
               .map((filename) => filename.replace(CWD, ''))
           );
-      };
 
-      window.getFileContent = (url) => {
+      window.getFileContent = (url) =>
         Promise.resolve()
           .then(() => fs.readFileSync(path.join(CWD, url), 'utf8'));
-      };
 
       window.getJSON = (url) =>
         Promise.resolve()

@@ -18,7 +18,6 @@ resolve({
     .then((questionFiles) => Promise.all(
       questionFiles.map((questionFile) =>
         getFileContent(questionFile)
-          .then((response) => response.text())
           .then((content) => {
             content = new Buffer(content, 'base64').toString('utf8');
 
