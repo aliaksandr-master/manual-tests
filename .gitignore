@@ -22,6 +22,8 @@ Thumbs.db
 .idea/
 .tmp/
 app/app.js
+npm-debug.log
+npm-debug.log.*
 
 *_scsslint_*
 node_modules/
