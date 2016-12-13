@@ -16,6 +16,7 @@ module.exports = (done) => {
     cacheDir: options.DIR_NW_CACHE,
     files: [
       `${options.DIR_CWD}/package.json`,
+      `${options.DIR_CWD}/node_modules/**/*`,
       `${options.DIR_CWD}/${options.DIR_SRC}/**/*`,
     ],
     platforms: [ 'win32', 'win64', 'linux64' ]
