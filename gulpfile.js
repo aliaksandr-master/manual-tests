@@ -23,5 +23,6 @@ gulp.task('dev', 'dev server. open page in main browser', [
 
 gulp.task('release', 'release the project', task.sequence(
   task('release/build-bundle'),
-  task('release/deploy-app')
+  task('release/deploy-app'),
+  task('release/copy-dat4')
 ));

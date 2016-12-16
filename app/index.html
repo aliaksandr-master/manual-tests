@@ -52,7 +52,7 @@
       const win = gui.Window.get();
 
       const path = require('path');
-      const CWD = path.dirname(process.execPath);
+      const CWD = path.normalize(path.dirname(process.execPath));
       const fs = require('fs');
       const glob = require('glob');
 
@@ -61,12 +61,12 @@
           .then(() =>
             glob
               .sync(path.join(CWD, globTpl))
-              .map((filename) => filename.replace(CWD, ''))
+              .map((filename) => path.normalize(filename).replace(CWD, ''))
           );
 
       window.getFileContent = (url) =>
         Promise.resolve()
-          .then(() => fs.readFileSync(path.join(CWD, url), 'utf8'));
+          .then(() => fs.readFileSync(path.normalize(path.join(CWD, url)), 'utf8'));
 
       window.getJSON = (url) =>
         Promise.resolve()
