@@ -6,10 +6,12 @@ import dom from '../../lib/component-dom';
 import iterate from '../../lib/dom/iterate';
 import { PAGE_TEST_QUESTION, EVENT_CHANGE_PAGE_CONTENT, changePage } from '../../config/actions';
 
+const passName = `sec${Date.now()}`;
+
 export default Component(({ db: { questions, maxQuestions, tags } }) =>
 `
 <div class="b-page-test-start">
-  <form onsubmit="return false;" style="margin: 0 auto; max-width: 600px;">
+  <div style="margin: 0 auto; max-width: 600px;">
     <h4 style="margin: 0 0 5px;">Тест по дисциплине</h4>
     <h2 style="margin: 5px 0 15px;">«Тестирование, оценка программного обеспечения»</h2>
     <p class="b-page-test-start__info" style="margin: 15px auto 15px;">
@@ -27,10 +29,10 @@ export default Component(({ db: { questions, maxQuestions, tags } }) =>
     </p>
     
     <div class="b-page-test-start__controls text-center" style="margin-top: 20px">
-      <input autofocus="autofocus" autocomplete="off" type="password" placeholder="Пароль" name="password" class="form-control text-center b-page-test-start__password" />
+      <input autofocus="autofocus" autocomplete="off" type="password" placeholder="Пароль" name="${passName}" class="form-control text-center b-page-test-start__password" />
       <button id="b-page-test-start__start" class="btn btn-block btn-primary btn-lg">Приступить к тестированию</button>
     </div>
-  </form>
+  </div>
 </div>
 `,
 ({ store }, { el, events }) => {
@@ -47,7 +49,7 @@ export default Component(({ db: { questions, maxQuestions, tags } }) =>
   on('#b-page-test-start__start', 'click', () => {
     const data = serialize('[name]');
 
-    if (data.password !== pass) {
+    if (data[passName] !== pass) {
       window.alert('Неверный пароль!');
       return;
     }

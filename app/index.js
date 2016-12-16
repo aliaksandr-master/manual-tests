@@ -18,20 +18,25 @@ resolve({
     .then((questionFiles) => Promise.all(
       questionFiles.map((questionFile) =>
         getFileContent(questionFile)
-          .then((content) => {
-            content = new Buffer(content, 'base64').toString('utf8');
+          .then((content) =>
+            content
+              .split('\n').filter(Boolean)
+              .map((line) => line.split(/\s+/).filter(Boolean).pop())
+              .map((content) => new Buffer(content, 'base64').toString('utf8'))
+              .map((content) => {
+                try {
+                  content = JSON.parse(content);
+                } catch (er) {
+                  content = null;
+                }
 
-            try {
-              content = JSON.parse(content);
-            } catch (er) {
-              content = null;
-            }
-
-            return content;
-          })
+                return content;
+              })
+              .filter(Boolean)
+          )
       )
     ))
-    .then((questions) => questions.filter(Boolean))
+    .then((results) => results.reduce((result, qArr) => result.concat(qArr), []))
 })
 .then(resolve.nested({
   questionsByTag: ({ questions }) =>
@@ -54,6 +59,12 @@ resolve({
     tags: Object.keys(questionsByTag)
   };
 
-  renderToDom(bApp(data), document.body);
+  renderToDom(bApp(data), document.body, {
+    onRender: () => {
+      const preloader = document.getElementById('preloader');
+
+      preloader.parentNode.removeChild(preloader);
+    }
+  });
 });
 
