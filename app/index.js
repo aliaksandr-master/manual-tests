@@ -14,29 +14,23 @@ const MAX_TIME = 30 * 60 * 1000;
 
 resolve({
   auth: () => getObject('auth', { first_name: '', last_name: '', group_number: 0 }),
-  questions: () => getFilesInDir('/data/*.dat4')
-    .then((questionFiles) => Promise.all(
-      questionFiles.map((questionFile) =>
-        getFileContent(questionFile)
-          .then((content) =>
-            content
-              .split('\n').filter(Boolean)
-              .map((line) => line.split(/\s+/).filter(Boolean).pop())
-              .map((content) => new Buffer(content, 'base64').toString('utf8'))
-              .map((content) => {
-                try {
-                  content = JSON.parse(content);
-                } catch (er) {
-                  content = null;
-                }
+  questions: () => getFileContent('/data/questions.dat4')
+    .then((content) =>
+      content
+        .split('\n').filter(Boolean)
+        .map((line) => line.split(/\s+/).filter(Boolean).pop())
+        .map((content) => new Buffer(content, 'base64').toString('utf8'))
+        .map((content) => {
+          try {
+            content = JSON.parse(content);
+          } catch (er) {
+            content = null;
+          }
 
-                return content;
-              })
-              .filter(Boolean)
-          )
-      )
-    ))
-    .then((results) => results.reduce((result, qArr) => result.concat(qArr), []))
+          return content;
+        })
+        .filter(Boolean)
+    )
 })
 .then(resolve.nested({
   questionsByTag: ({ questions }) =>
