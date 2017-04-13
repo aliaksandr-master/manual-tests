@@ -8,17 +8,17 @@ import { PAGE_TEST_QUESTION, EVENT_CHANGE_PAGE_CONTENT, changePage } from '../..
 
 const passName = `sec${Date.now()}`;
 
-export default Component(({ db: { questions, maxQuestions, tags } }) =>
+export default Component(({ db: { questions, maxQuestions, maxTime, tags, test: { discipline } } }) =>
 `
 <div class="b-page-test-start">
   <div style="margin: 0 auto; max-width: 600px;">
     <h4 style="margin: 0 0 5px;">Тест по дисциплине</h4>
-    <h2 style="margin: 5px 0 15px;">«Тестирование, оценка программного обеспечения»</h2>
+    <h2 style="margin: 5px 0 15px;">«${discipline}»</h2>
     <p class="b-page-test-start__info" style="margin: 15px auto 15px;">
-      Время прохождения теста = 30 минут<br/>
+      Время прохождения теста = ${maxTime} минут<br/>
       По истечении времени выполнения теста осуществляется автоматический переход к странице результатов.<br/> 
       Вопросы, на которые Вы не успели ответить, участвуют при подсчете итогового результата теста, при этом ответы на них классифицируются как неправильные.<br/><br/>
-      Количество вопросов в тесте = ${maxQuestions} (по ${ tags.length } темам)<br/>
+      Количество вопросов в тесте = ${maxQuestions} (по ${tags.length} темам)<br/>
       Вопросы выбираются случайным образом из общего набора.<br/><br/>
       Вопрос может подразумевать несколько правильных вариантов ответа, что отражено в формулировке самого вопроса. Внимательно читайте текст вопроса!<br/>
       Если в ответе на вопрос с несколькими правильными вариантами ответов Вы отметили не все правильные варианты, данный ответ классифицируется как неправильный.<br/>
@@ -44,7 +44,7 @@ export default Component(({ db: { questions, maxQuestions, tags } }) =>
 
   const date = new Date();
   const salt = date.getDate()+date.getMonth()+1;
-  const pass = `${salt}tiramisu${String(salt).length}`;
+  const pass = `${salt}tiramisu`;
 
   on('#b-page-test-start__start', 'click', () => {
     const data = serialize('[name]');

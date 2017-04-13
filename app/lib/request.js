@@ -18,11 +18,30 @@ export const getFileContent = (url) => {
     .then((response) => response.text());
 };
 
-export const getFilesInDir = (url) => {
-  if (window.getFilesInDir) {
-    return window.getFilesInDir(url);
-  }
+export const getTestData = () => {
+  return getFileContent('/data/test.dat4')
+    .then((content) =>
+      content
+        .split('\n').filter(Boolean)
+        .map((line) => line.split(/\s+/).filter(Boolean).pop())
+        .map((content) => new Buffer(content, 'base64').toString('utf8'))
+        .map((content) => {
+          try {
+            content = JSON.parse(content);
+          } catch (er) {
+            content = null;
+          }
 
-  return window.fetch(url, { headers: { 'X-Dir-Files': 'glob' } })
-    .then((response) => response.json());
+          return content;
+        })
+        .filter(Boolean)
+    )
+    .then((content) => {
+      const [ meta, ...questions ] = content;
+
+      return {
+        meta,
+        questions
+      }
+    });
 };
