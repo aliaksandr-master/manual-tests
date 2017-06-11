@@ -15,7 +15,7 @@ export default Component(({ db: { questions, maxQuestions, maxTime, tags, test: 
     <h4 style="margin: 0 0 5px;">Тест по дисциплине</h4>
     <h2 style="margin: 5px 0 15px;">«${discipline}»</h2>
     <p class="b-page-test-start__info" style="margin: 15px auto 15px;">
-      Время прохождения теста = ${maxTime} минут<br/>
+      Время прохождения теста = ${maxTime/(1000*60)} минут<br/>
       По истечении времени выполнения теста осуществляется автоматический переход к странице результатов.<br/> 
       Вопросы, на которые Вы не успели ответить, участвуют при подсчете итогового результата теста, при этом ответы на них классифицируются как неправильные.<br/><br/>
       Количество вопросов в тесте = ${maxQuestions} (по ${tags.length} темам)<br/>

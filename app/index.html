@@ -54,15 +54,6 @@
       const path = require('path');
       const CWD = path.normalize(path.dirname(process.execPath));
       const fs = require('fs');
-      const glob = require('glob');
-
-      window.getFilesInDir = (globTpl) =>
-        Promise.resolve()
-          .then(() =>
-            glob
-              .sync(path.join(CWD, globTpl))
-              .map((filename) => path.normalize(filename).replace(CWD, ''))
-          );
 
       window.getFileContent = (url) =>
         Promise.resolve()

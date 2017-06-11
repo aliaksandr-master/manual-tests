@@ -14,14 +14,12 @@ resolve({
 })
 .then(resolve.nested({
   questionsByTag: ({ test: { questions } }) =>
-    groupBy(questions, (question) =>
-      String(question.tag).trim()
-    )
+    groupBy(questions, (question) => String(question.tag).trim())
 }))
 .then(({ test, auth, questionsByTag }) => {
   const data = {
     test: test.meta,
-    maxTime: test.meta.duration, // 30min
+    maxTime: test.meta.duration * 60 * 1000, // 30min
     maxQuestions: test.meta.count,
     auth,
     questions: test.questions,
@@ -33,6 +31,8 @@ resolve({
     }, {}),
     tags: Object.keys(questionsByTag)
   };
+
+  console.log(data);
 
   renderToDom(bApp(data), document.body, {
     onRender: () => {

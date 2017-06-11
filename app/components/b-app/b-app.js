@@ -78,6 +78,29 @@ const applyContentComponent = (child, slotElement, routeId, data = {}) => {
   return renderToDom(component, slotElement);
 };
 
+const calcQuestionsdIList = (questionsByTag, max) => {
+  const idByTag = Object.keys(questionsByTag).map((tag) => questionsByTag[tag].map(({ id }) => id)).reduce((idByTag, ids) =>
+    idByTag.concat([ ids.filter((id) => idByTag.every((idsw) => !idsw.includes(id))) ])
+  , []);
+
+  const total = idByTag.map((q) => q.length).reduce((sum, len) => sum + len, 0);
+
+  return randomArray(
+    idByTag
+      .map((tagQuestions) => {
+        const len = tagQuestions.length;
+        const qCount = Math.ceil((len / total) * max);
+
+        return {
+          len,
+          list: randomArray(tagQuestions, qCount)
+        };
+      })
+      .sort((w1, w2) => w1.len - w2.len)
+      .reduce((ids, { list }) => ids.concat(list), [])
+  , max)
+};
+
 export default Component(({}, $cmp) =>
 `<div class="b-app">
   <div class="b-app__timer text-right"></div>  
@@ -85,7 +108,7 @@ export default Component(({}, $cmp) =>
   <div class="b-app__progress"></div>
 </div>`,
 (db, { el, events, child }) => {
-  const { questionsByTag, questions, maxQuestions } = db;
+  const { questionsByTag, maxQuestions } = db;
   const cleanups = [];
   const content = document.getElementById('b-app__content');
 
@@ -108,24 +131,7 @@ export default Component(({}, $cmp) =>
       if (testIndex === 0) {
         test.answers = [];
         test.questionIndex = 0;
-        test.questionsIds = Object.keys(questionsByTag)
-          .map((tag) => ({ tag, weight: questionsByTag[tag].length }))
-          .sort((w1, w2) => {
-            if (w1.weight > w2.weight) {
-              return 1;
-            }
-
-            if (w1.weight < w2.weight) {
-              return -1;
-            }
-
-            return 0;
-          })
-          .reduce((questionsIds, { tag, weight }) => {
-            const qCount = Math.ceil((weight / questions.length) * maxQuestions);
-
-            return randomArray(questionsIds.concat(randomArray(questionsByTag[tag], qCount).map((q) => q.id)), maxQuestions);
-          }, []);
+        test.questionsIds = calcQuestionsdIList(questionsByTag, maxQuestions);
 
         events.emit(START_TEST);
       }
