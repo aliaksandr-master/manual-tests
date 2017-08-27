@@ -18,7 +18,8 @@ import {
 } from '../../config/actions'
 
 import once from 'lodash/once';
-import randomArray from '../../lib/random-array';
+import cloneDeep from 'lodash/cloneDeep';
+import shuffle from 'lodash/shuffle';
 
 
 const timeIterator = (delay, iterator) => {
@@ -79,13 +80,24 @@ const applyContentComponent = (child, slotElement, routeId, data = {}) => {
 };
 
 const calcQuestionsdIList = (questionsByTag, max) => {
-  const idByTag = Object.keys(questionsByTag).map((tag) => questionsByTag[tag].map(({ id }) => id)).reduce((idByTag, ids) =>
-    idByTag.concat([ ids.filter((id) => idByTag.every((idsw) => !idsw.includes(id))) ])
-  , []);
+  const idByTag = Object
+    .keys(questionsByTag)
+    .map((tag) => questionsByTag[tag]
+      .map(({ id }) => id)
+    )
+    .reduce((idByTag, ids) =>
+      idByTag.concat([
+        ids.filter((id) =>
+          idByTag.every((idsw) => !idsw.includes(id))
+        )
+      ])
+    , []);
 
-  const total = idByTag.map((q) => q.length).reduce((sum, len) => sum + len, 0);
+  const total = idByTag
+    .map((q) => q.length)
+    .reduce((sum, len) => sum + len, 0);
 
-  return randomArray(
+  return shuffle(cloneDeep(
     idByTag
       .map((tagQuestions) => {
         const len = tagQuestions.length;
@@ -93,12 +105,13 @@ const calcQuestionsdIList = (questionsByTag, max) => {
 
         return {
           len,
-          list: randomArray(tagQuestions, qCount)
+          list: shuffle(cloneDeep(tagQuestions)).slice(0, qCount)
         };
       })
       .sort((w1, w2) => w1.len - w2.len)
       .reduce((ids, { list }) => ids.concat(list), [])
-  , max)
+  ))
+    .slice(0, max)
 };
 
 export default Component(({}, $cmp) =>
