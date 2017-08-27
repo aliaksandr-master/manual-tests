@@ -65,6 +65,12 @@
   font-size: 16px;
   line-height: 1.4;
   color: #444;
+  opacity: 0.9;
+
+  &:hover {
+    color: black;
+    opacity: 1;
+  }
 
   &:before {
     content: '';
@@ -77,6 +83,10 @@
     height: @b-page-test-question__marker--size;
     background: white;
     border-radius: 2px;
+  }
+
+  &:hover:before {
+    border-color: black;
   }
 
   .b-page-test-question__answer-toggle:checked + &:after {
